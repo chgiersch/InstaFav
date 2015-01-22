@@ -1,5 +1,5 @@
 //
-//  ViewController.h
+//  SearchViewController.h
 //  InstaFav
 //
 //  Created by Chris Giersch on 1/22/15.
@@ -8,8 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ViewController : UIViewController
-
+@interface SearchViewController : UIViewController
 
 @end
-
