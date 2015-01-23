@@ -126,6 +126,9 @@
                             <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="cb5-iC-RYh">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                                 <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <outlet property="delegate" destination="bqw-gi-Lcc" id="RdD-6b-vVq"/>
+                                </connections>
                             </searchBar>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="lZB-nh-pu3">
                                 <rect key="frame" x="0.0" y="40" width="320" height="528"/>
@@ -168,12 +171,21 @@
                                     <outlet property="delegate" destination="bqw-gi-Lcc" id="EYe-9Y-K42"/>
                                 </connections>
                             </collectionView>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="amw-ii-keZ">
+                                <rect key="frame" x="142" y="266" width="37" height="37"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="37" id="eoL-6j-dQL"/>
+                                    <constraint firstAttribute="width" constant="37" id="gfO-Zs-emE"/>
+                                </constraints>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="trailingMargin" secondItem="lZB-nh-pu3" secondAttribute="trailing" constant="-16" id="05u-rv-VNn"/>
                             <constraint firstItem="cb5-iC-RYh" firstAttribute="leading" secondItem="8dT-Wg-cF5" secondAttribute="leading" id="8XA-gd-vcS"/>
                             <constraint firstItem="cb5-iC-RYh" firstAttribute="top" secondItem="8dT-Wg-cF5" secondAttribute="top" id="XNk-Vw-GlV"/>
+                            <constraint firstAttribute="centerY" secondItem="amw-ii-keZ" secondAttribute="centerY" id="Xhf-fV-K27"/>
+                            <constraint firstAttribute="centerX" secondItem="amw-ii-keZ" secondAttribute="centerX" id="ZFK-jd-CHN"/>
                             <constraint firstAttribute="trailing" secondItem="cb5-iC-RYh" secondAttribute="trailing" id="clY-dh-zmF"/>
                             <constraint firstItem="lZB-nh-pu3" firstAttribute="bottom" secondItem="8dT-Wg-cF5" secondAttribute="bottomMargin" id="iQS-Cv-16i"/>
                             <constraint firstItem="lZB-nh-pu3" firstAttribute="leading" secondItem="8dT-Wg-cF5" secondAttribute="leadingMargin" constant="-16" id="kKa-o5-HnA"/>
@@ -183,6 +195,8 @@
                     <tabBarItem key="tabBarItem" systemItem="search" id="eXZ-jX-qVv"/>
                     <connections>
                         <outlet property="collectionView" destination="lZB-nh-pu3" id="F6m-Z9-uEu"/>
+                        <outlet property="searchBar" destination="cb5-iC-RYh" id="ph3-ZV-fgr"/>
+                        <outlet property="spinner" destination="amw-ii-keZ" id="RTd-zF-Hiy"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ADg-Tx-599" userLabel="First Responder" sceneMemberID="firstResponder"/>

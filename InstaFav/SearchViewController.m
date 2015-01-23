@@ -13,13 +13,16 @@
 
 #define kDateKey @"dateSaved"
 
-@interface SearchViewController () <UICollectionViewDataSource, UICollectionViewDelegate, ParserDelegate>
+@interface SearchViewController () <UICollectionViewDataSource, UICollectionViewDelegate, ParserDelegate, UISearchBarDelegate>
 
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 @property NSMutableArray *photosArray;
 @property NSMutableArray *photoFavArray;
+@property (strong, nonatomic) IBOutlet UIActivityIndicatorView *spinner;
+@property (strong, nonatomic) IBOutlet UISearchBar *searchBar;
 
 @property NSString *hashtag;
+@property JSONParser *parser;
 
 @end
 
@@ -34,17 +37,38 @@
     {
         self.photoFavArray = [NSMutableArray new];
     }
-    JSONParser *parser = [JSONParser new];
+    self.parser = [JSONParser new];
+
+    //Default search is "cats". ^_^
     self.hashtag = @"cats";
-    parser.delegate = self;
-    [parser getImagesFromHashtagSearch:self.hashtag];
+    self.parser.delegate = self;
+    [self.parser getImagesFromHashtagSearch:self.hashtag];
+    [self.spinner startAnimating];
 
 }
 
-//-------------------------------    JSON Parcer Delegate    -----------------------------------
-#pragma mark - JSON Parcer
+
+//-----------------------------    Search Bar Delegate Method    -----------------------------------
+#pragma mark - Search Bar Delegate Method
+-(void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
+{
+    NSString *searchTerm = searchBar.text;
+    NSCharacterSet *set = [NSCharacterSet whitespaceCharacterSet];
+
+    //only do a search if searchTerm does not consist of only whitespace
+    if (![[searchTerm stringByTrimmingCharactersInSet: set] length] == 0)
+    {
+        [self.spinner startAnimating];
+        [self.parser getImagesFromHashtagSearch:searchTerm];
+        [searchBar resignFirstResponder];
+    }
+}
+
+//-------------------------------    JSON Parser Delegate    -----------------------------------
+#pragma mark - JSON Parser
 - (void)didFinishJSONSearchWithMutableArray:(NSMutableArray *)mutableArray
 {
+    [self.spinner stopAnimating];
     self.photosArray = mutableArray;
     [self.collectionView reloadData];
 }
@@ -79,10 +103,16 @@
     }
 }
 
-
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-    return self.photosArray.count;
+    if (self.photosArray.count < 10)
+    {
+        return self.photosArray.count;
+    }
+    else
+    {
+        return 10;
+    }
 }
 
 #pragma mark - Data Persistance
