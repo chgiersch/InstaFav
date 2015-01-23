@@ -23,31 +23,11 @@
         NSArray *instagramPostArray = instagramData[@"data"];
         for (NSDictionary *post in instagramPostArray)
         {
-            Photo *newPhoto = [Photo new];
-
-            NSDictionary *images = post[@"images"];
-            newPhoto.uniqueID = post[@"id"];
-            newPhoto.isFavorite = NO;
-
-            NSURL *imageURL = images[@"standard_resolution"];
-            UIImage *image = [UIImage imageWithData:[NSData dataWithContentsOfURL:imageURL]];
-            newPhoto.image = image;
-
-            NSDictionary *location = post[@"location"];
-            if (location)
-            {
-                double latitude = [location[@"latitude"] doubleValue];
-                double longitude = [location[@"longitude" ] doubleValue];
-                newPhoto.coordinate = CLLocationCoordinate2DMake(latitude,longitude);
-            }
-
-            newPhoto.hashtags = post[@"tags"];
-            newPhoto.userName = post[@"user"][@"username"];
-
+            Photo *newPhoto = [[Photo alloc] initWithDictionary:post];
             [photosArray addObject:newPhoto];
         }
-        //DELEGATE
-
+        
+        [self.delegate didFinishJSONSearchWithMutableArray:photosArray];
     }];
 }
 

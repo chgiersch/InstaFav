@@ -7,31 +7,53 @@
 //
 
 #import "SearchViewController.h"
+#import "JSONParser.h"
+#import "Photo.h"
+#import "CustomCollectionViewCell.h"
 
-@interface SearchViewController ()
+@interface SearchViewController () <UICollectionViewDataSource, UICollectionViewDelegate, ParserDelegate>
+
+@property NSMutableArray *photosArray;
+@property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 
 @end
 
+
 @implementation SearchViewController
 
-- (void)viewDidLoad {
+- (void)viewDidLoad
+{
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+//-------------------------------    JSON Parcer Delegate    -----------------------------------
+#pragma mark - JSON Parcer
+- (void)didFinishJSONSearchWithMutableArray:(NSMutableArray *)mutableArray
+{
+    self.photosArray = mutableArray;
+    [self.collectionView reloadData];
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+//----------------------------------    Collection View    -----------------------------------
+#pragma mark - Collection View
+- (CustomCollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    CustomCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"ImageCell" forIndexPath:indexPath];
+    if ([self.photosArray[indexPath.row] isFavorite])
+    {
+        cell.imageView.image = [self.photosArray[indexPath.row] image];
+        return cell;
+    }
+    else
+    {
+        return nil;
+    }
 }
-*/
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
+{
+    return self.photosArray.count;
+}
+
+
 
 @end

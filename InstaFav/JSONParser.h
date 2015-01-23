@@ -10,6 +10,9 @@
 #import "Photo.h"
 
 @protocol ParserDelegate <NSObject>
+
+- (void)didFinishJSONSearchWithMutableArray:(NSMutableArray *)mutableArray;
+
 @end
 
 @interface JSONParser : NSObject

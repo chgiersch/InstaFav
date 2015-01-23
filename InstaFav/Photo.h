@@ -12,11 +12,13 @@
 
 @interface Photo : NSObject
 
+- (instancetype)initWithDictionary:(NSDictionary *)dictionary;
+
 @property NSString *uniqueID;
 @property BOOL isFavorite;
 @property UIImage *image;
 @property CLLocationCoordinate2D coordinate;
-@property NSMutableArray *hashtags;
+@property NSArray *hashtags;
 @property NSString *userName;
 
 @end
