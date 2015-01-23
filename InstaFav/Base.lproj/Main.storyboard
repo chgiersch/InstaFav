@@ -105,7 +105,7 @@
                             <constraint firstAttribute="trailing" secondItem="W2G-nQ-Lmz" secondAttribute="trailing" id="it7-aX-XyJ"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" systemItem="more" id="Q6u-fo-HjO"/>
+                    <tabBarItem key="tabBarItem" selectedImage="trifoldMap_icon" systemItem="more" id="Q6u-fo-HjO"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HAA-P4-Zqr" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -193,6 +193,7 @@
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" systemItem="search" id="eXZ-jX-qVv"/>
+                    <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
                     <connections>
                         <outlet property="collectionView" destination="lZB-nh-pu3" id="F6m-Z9-uEu"/>
                         <outlet property="searchBar" destination="cb5-iC-RYh" id="ph3-ZV-fgr"/>
@@ -224,6 +225,9 @@
             <point key="canvasLocation" x="684" y="437"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="trifoldMap_icon" width="256" height="256"/>
+    </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>

@@ -54,12 +54,12 @@
 {
     NSString *searchTerm = searchBar.text;
     NSCharacterSet *set = [NSCharacterSet whitespaceCharacterSet];
-
+    NSString *searchTermWithoutWhitespaces = [searchTerm stringByTrimmingCharactersInSet: set];
     //only do a search if searchTerm does not consist of only whitespace
-    if (![[searchTerm stringByTrimmingCharactersInSet: set] length] == 0)
+    if (searchTermWithoutWhitespaces != 0)
     {
         [self.spinner startAnimating];
-        [self.parser getImagesFromHashtagSearch:searchTerm];
+        [self.parser getImagesFromHashtagSearch:searchTermWithoutWhitespaces];
         [searchBar resignFirstResponder];
     }
 }
@@ -115,6 +115,8 @@
     }
 }
 
+
+//----------------------------------    Data Persistance    -----------------------------------
 #pragma mark - Data Persistance
 - (NSURL *)documentsDirectory
 {
@@ -129,16 +131,25 @@
 
 - (void)save
 {
+    // Not saving to harddrive
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    [self.photoFavArray writeToURL:[self plist] atomically:YES];
+    NSData *data = [NSKeyedArchiver archivedDataWithRootObject:self.photoFavArray];
+    [data writeToURL:[self plist] atomically:YES];  // This is saving a custom Photo class subclassing NSObject
     [defaults setObject:[NSDate date] forKey:kDateKey];
     [defaults synchronize];
 }
 
 - (void)load
 {
-    NSURL *plistPath = [[self documentsDirectory] URLByAppendingPathComponent:@"Photos.plist"];
-    self.photoFavArray = [NSMutableArray arrayWithContentsOfURL:plistPath];
+    //If there's something in the plist, set photoFavArray to it
+    if ([NSMutableArray arrayWithContentsOfURL:[self plist]])
+    {
+        self.photoFavArray = [NSMutableArray arrayWithContentsOfURL:[self plist]];
+    }
+    else
+    {
+        self.photoFavArray = [NSMutableArray new];
+    }
 }
 
 

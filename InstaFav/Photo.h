@@ -10,9 +10,13 @@
 #import <UIKit/UIKit.h>
 #import <MapKit/MapKit.h>
 
-@interface Photo : NSObject
+
+@interface Photo : NSObject <NSCoding>
+
+-(void)encodeWithCoder:(NSCoder *)encoder;
 
 - (instancetype)initWithDictionary:(NSDictionary *)dictionary;
+- (id)initWithCoder:(NSCoder *)decoder;
 
 @property NSString *uniqueID;
 @property BOOL isFavorite;

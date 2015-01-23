@@ -15,7 +15,7 @@
 @interface FavoritesViewController () <UICollectionViewDataSource, UICollectionViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
-@property NSMutableArray *photosArray;
+@property NSMutableArray *photoFavArray;
 
 
 @end
@@ -27,10 +27,14 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.photosArray = [NSMutableArray new];
+    [self load];
+    // IF photoFavArray doesn't exist (=nil), create new one
+    if (!self.photoFavArray)
+    {
+        self.photoFavArray = [NSMutableArray new];
+    }
+    [self.collectionView reloadData];
 }
-
-
 
 
 //----------------------------------    Collection View    -----------------------------------
@@ -38,28 +42,30 @@
 - (CustomCollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     CustomCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"ImageCell" forIndexPath:indexPath];
-    if ([self.photosArray[indexPath.row] isFavorite])
+    if ([self.photoFavArray[indexPath.row] isFavorite])
     {
-        cell.imageView.image = [self.photosArray[indexPath.row] image];
+        cell.imageView.image = [self.photoFavArray[indexPath.row] image];
         return cell;
     }
     else
     {
-        return nil;
+        return cell;
     }
 }
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-    return self.photosArray.count;
+    return self.photoFavArray.count;
 }
 
 
-//----------------------------------    Data Persistance    -----------------------------------
+//----------------------------------     Data Persistance    -----------------------------------
+#warning ******     Extract to custom class later PLEASE :)     ******
 #pragma mark - Data Persistance
 - (NSURL *)documentsDirectory
 {
     return [[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask].firstObject;
 }
+
 - (NSURL *)plist
 {
     NSURL *plistPath = [[self documentsDirectory] URLByAppendingPathComponent:@"Photos.plist"];
@@ -68,17 +74,26 @@
 
 - (void)save
 {
+    // Not saving to harddrive
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    [self.photosArray writeToURL:[self plist] atomically:YES];
+    NSData *data = [NSKeyedArchiver archivedDataWithRootObject:self.photoFavArray];
+    [data writeToURL:[self plist] atomically:YES];  // This is saving a custom Photo class subclassing NSObject
     [defaults setObject:[NSDate date] forKey:kDateKey];
     [defaults synchronize];
 }
 
 - (void)load
 {
-    NSURL *plistPath = [[self documentsDirectory] URLByAppendingPathComponent:@"Photos.plist"];
-    self.photosArray = [NSMutableArray arrayWithContentsOfURL:plistPath];
+    //If there's something in the plist, set photoFavArray to it
+    NSData *data = [NSData dataWithContentsOfURL:[self plist]];
+    self.photoFavArray = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+
 }
+
+
+
+
+
 
 
 @end

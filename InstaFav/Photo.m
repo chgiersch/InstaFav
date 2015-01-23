@@ -36,4 +36,31 @@
     return self;
 }
 
+-(void)encodeWithCoder:(NSCoder *)encoder
+{
+    [encoder encodeObject:self.uniqueID forKey:@"uniqueID"];
+    [encoder encodeBool:self.isFavorite forKey:@"isFavorite"];
+    [encoder encodeObject:self.image forKey:@"image"];
+    [encoder encodeDouble:self.coordinate.latitude forKey:@"latitude"];
+    [encoder encodeDouble:self.coordinate.longitude forKey:@"longitide"];
+    [encoder encodeObject:self.hashtags forKey:@"hashtags"];
+    [encoder encodeObject:self.userName forKey:@"userName"];
+
+}
+
+- (id)initWithCoder:(NSCoder *)decoder
+{
+    self = [super init];
+    if (self)
+    {
+        self.uniqueID = [decoder decodeObjectForKey:@"uniqueID"];
+        self.isFavorite = [decoder decodeBoolForKey:@"isFavorite"];
+        self.image = [decoder decodeObjectForKey:@"image"];
+        self.coordinate = CLLocationCoordinate2DMake([decoder decodeDoubleForKey:@"latitude"], [decoder decodeDoubleForKey:@"longitude"]);
+        self.hashtags = [decoder decodeObjectForKey:@"hashtags"];
+        self.userName = [decoder decodeObjectForKey:@"userName"];
+    }
+    return self;
+}
+
 @end
