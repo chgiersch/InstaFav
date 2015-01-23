@@ -16,7 +16,9 @@
 		0FC09C1B1A71ABD80081C227 /* FavoritesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FC09C1A1A71ABD80081C227 /* FavoritesViewController.m */; };
 		0FC09C1F1A71AF180081C227 /* SearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FC09C1E1A71AF180081C227 /* SearchViewController.m */; };
 		0FC09C221A71AF8B0081C227 /* MapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FC09C211A71AF8B0081C227 /* MapViewController.m */; };
-		0FC09C251A71AFE80081C227 /* Photo.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FC09C241A71AFE80081C227 /* Photo.m */; };
+		6076D9F21A71BDB5000574C4 /* JSONParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 6076D9EF1A71BDB5000574C4 /* JSONParser.m */; };
+		6076D9F31A71BDB5000574C4 /* Photo.m in Sources */ = {isa = PBXBuildFile; fileRef = 6076D9F11A71BDB5000574C4 /* Photo.m */; };
+		6076D9F51A71C22D000574C4 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6076D9F41A71C22D000574C4 /* MapKit.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,8 +49,11 @@
 		0FC09C1E1A71AF180081C227 /* SearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchViewController.m; sourceTree = "<group>"; };
 		0FC09C201A71AF8B0081C227 /* MapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapViewController.h; sourceTree = "<group>"; };
 		0FC09C211A71AF8B0081C227 /* MapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapViewController.m; sourceTree = "<group>"; };
-		0FC09C231A71AFE80081C227 /* Photo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Photo.h; sourceTree = "<group>"; };
-		0FC09C241A71AFE80081C227 /* Photo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Photo.m; sourceTree = "<group>"; };
+		6076D9EE1A71BDB5000574C4 /* JSONParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JSONParser.h; path = InstaFav/JSONParser.h; sourceTree = "<group>"; };
+		6076D9EF1A71BDB5000574C4 /* JSONParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JSONParser.m; path = InstaFav/JSONParser.m; sourceTree = "<group>"; };
+		6076D9F01A71BDB5000574C4 /* Photo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Photo.h; path = InstaFav/Photo.h; sourceTree = "<group>"; };
+		6076D9F11A71BDB5000574C4 /* Photo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Photo.m; path = InstaFav/Photo.m; sourceTree = "<group>"; };
+		6076D9F41A71C22D000574C4 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +61,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6076D9F51A71C22D000574C4 /* MapKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -72,6 +78,7 @@
 		0FC09BE71A71AAC50081C227 = {
 			isa = PBXGroup;
 			children = (
+				6076D9F41A71C22D000574C4 /* MapKit.framework */,
 				0FC09BF21A71AAC50081C227 /* InstaFav */,
 				0FC09C0C1A71AAC50081C227 /* InstaFavTests */,
 				0FC09BF11A71AAC50081C227 /* Products */,
@@ -144,8 +151,10 @@
 		0FC09C261A71AFEB0081C227 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				0FC09C231A71AFE80081C227 /* Photo.h */,
-				0FC09C241A71AFE80081C227 /* Photo.m */,
+				6076D9EE1A71BDB5000574C4 /* JSONParser.h */,
+				6076D9EF1A71BDB5000574C4 /* JSONParser.m */,
+				6076D9F01A71BDB5000574C4 /* Photo.h */,
+				6076D9F11A71BDB5000574C4 /* Photo.m */,
 			);
 			name = Model;
 			path = ..;
@@ -259,9 +268,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0FC09C251A71AFE80081C227 /* Photo.m in Sources */,
+				6076D9F31A71BDB5000574C4 /* Photo.m in Sources */,
 				0FC09BF91A71AAC50081C227 /* AppDelegate.m in Sources */,
 				0FC09C1B1A71ABD80081C227 /* FavoritesViewController.m in Sources */,
+				6076D9F21A71BDB5000574C4 /* JSONParser.m in Sources */,
 				0FC09C221A71AF8B0081C227 /* MapViewController.m in Sources */,
 				0FC09C1F1A71AF180081C227 /* SearchViewController.m in Sources */,
 				0FC09BF61A71AAC50081C227 /* main.m in Sources */,
@@ -455,6 +465,7 @@
 				0FC09C151A71AAC50081C227 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		0FC09C161A71AAC50081C227 /* Build configuration list for PBXNativeTarget "InstaFavTests" */ = {
 			isa = XCConfigurationList;
@@ -463,6 +474,7 @@
 				0FC09C181A71AAC50081C227 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

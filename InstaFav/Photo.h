@@ -8,13 +8,14 @@
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
+#import <MapKit/MapKit.h>
 
 @interface Photo : NSObject
 
 @property NSString *uniqueID;
 @property BOOL isFavorite;
 @property UIImage *image;
-//@property CLLocation *location;
+@property CLLocationCoordinate2D coordinate;
 @property NSMutableArray *hashtags;
 @property NSString *userName;
 
