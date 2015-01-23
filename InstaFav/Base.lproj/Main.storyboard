@@ -34,7 +34,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="319" height="319"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="hwd-LN-isb">
+                                                <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="hwd-LN-isb">
                                                     <rect key="frame" x="0.0" y="0.0" width="319" height="319"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" secondItem="hwd-LN-isb" secondAttribute="height" multiplier="1:1" id="ztE-Ia-bhf"/>
@@ -123,29 +123,44 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="lZB-nh-pu3">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                            <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="cb5-iC-RYh">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </searchBar>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="lZB-nh-pu3">
+                                <rect key="frame" x="0.0" y="40" width="320" height="528"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="hA1-fX-shf">
-                                    <size key="itemSize" width="50" height="50"/>
+                                    <size key="itemSize" width="319" height="319"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="ImageCell" id="flK-Zx-Ku7">
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="ImageCell" id="flK-Zx-Ku7" customClass="CustomCollectionViewCell">
                                         <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="0.0" y="0.0" width="319" height="319"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="AlF-4D-8YH">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="AlF-4D-8YH">
                                                     <rect key="frame" x="0.0" y="0.0" width="319" height="319"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" secondItem="AlF-4D-8YH" secondAttribute="height" multiplier="1:1" id="YVt-5e-DWO"/>
+                                                    </constraints>
                                                 </imageView>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
+                                        <constraints>
+                                            <constraint firstAttribute="trailingMargin" secondItem="AlF-4D-8YH" secondAttribute="trailing" constant="-8" id="E3z-eh-133"/>
+                                            <constraint firstItem="AlF-4D-8YH" firstAttribute="top" secondItem="flK-Zx-Ku7" secondAttribute="topMargin" constant="-8" id="hgo-8U-hQr"/>
+                                            <constraint firstItem="AlF-4D-8YH" firstAttribute="leading" secondItem="flK-Zx-Ku7" secondAttribute="leadingMargin" constant="-8" id="qSR-p4-3yj"/>
+                                        </constraints>
                                         <size key="customSize" width="319" height="319"/>
+                                        <connections>
+                                            <outlet property="imageView" destination="AlF-4D-8YH" id="ZzH-ja-RAi"/>
+                                        </connections>
                                     </collectionViewCell>
                                 </cells>
                                 <connections>
@@ -156,10 +171,13 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="bottom" secondItem="lZB-nh-pu3" secondAttribute="bottom" id="BZC-98-93f"/>
-                            <constraint firstItem="lZB-nh-pu3" firstAttribute="leading" secondItem="8dT-Wg-cF5" secondAttribute="leading" id="Q0W-WP-nZH"/>
-                            <constraint firstItem="lZB-nh-pu3" firstAttribute="top" secondItem="8dT-Wg-cF5" secondAttribute="top" id="lhk-Gz-Dky"/>
-                            <constraint firstAttribute="trailing" secondItem="lZB-nh-pu3" secondAttribute="trailing" id="tjh-uV-Kvm"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="lZB-nh-pu3" secondAttribute="trailing" constant="-16" id="05u-rv-VNn"/>
+                            <constraint firstItem="cb5-iC-RYh" firstAttribute="leading" secondItem="8dT-Wg-cF5" secondAttribute="leading" id="8XA-gd-vcS"/>
+                            <constraint firstItem="cb5-iC-RYh" firstAttribute="top" secondItem="8dT-Wg-cF5" secondAttribute="top" id="XNk-Vw-GlV"/>
+                            <constraint firstAttribute="trailing" secondItem="cb5-iC-RYh" secondAttribute="trailing" id="clY-dh-zmF"/>
+                            <constraint firstItem="lZB-nh-pu3" firstAttribute="bottom" secondItem="8dT-Wg-cF5" secondAttribute="bottomMargin" id="iQS-Cv-16i"/>
+                            <constraint firstItem="lZB-nh-pu3" firstAttribute="leading" secondItem="8dT-Wg-cF5" secondAttribute="leadingMargin" constant="-16" id="kKa-o5-HnA"/>
+                            <constraint firstItem="lZB-nh-pu3" firstAttribute="top" secondItem="cb5-iC-RYh" secondAttribute="bottom" id="yIF-7T-NDm"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" systemItem="search" id="eXZ-jX-qVv"/>

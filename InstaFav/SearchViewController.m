@@ -11,10 +11,15 @@
 #import "Photo.h"
 #import "CustomCollectionViewCell.h"
 
+#define kDateKey @"dateSaved"
+
 @interface SearchViewController () <UICollectionViewDataSource, UICollectionViewDelegate, ParserDelegate>
 
-@property NSMutableArray *photosArray;
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
+@property NSMutableArray *photosArray;
+@property NSMutableArray *photoFavArray;
+
+@property NSString *hashtag;
 
 @end
 
@@ -24,6 +29,16 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.photosArray = [NSMutableArray new];
+    if (!self.photoFavArray)
+    {
+        self.photoFavArray = [NSMutableArray new];
+    }
+    JSONParser *parser = [JSONParser new];
+    self.hashtag = @"cats";
+    parser.delegate = self;
+    [parser getImagesFromHashtagSearch:self.hashtag];
+
 }
 
 //-------------------------------    JSON Parcer Delegate    -----------------------------------
@@ -39,19 +54,61 @@
 - (CustomCollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     CustomCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"ImageCell" forIndexPath:indexPath];
-    if ([self.photosArray[indexPath.row] isFavorite])
+
+    Photo *photo = self.photosArray[indexPath.item];
+    cell.imageView.image = photo.image;
+    return cell;
+}
+
+-(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    Photo *photo = [self.photosArray objectAtIndex:indexPath.row];
+    if ([self.photoFavArray containsObject:photo])
     {
-        cell.imageView.image = [self.photosArray[indexPath.row] image];
-        return cell;
+        [self load];
+        photo.isFavorite = NO;
+        [self.photoFavArray removeObject:photo];
+        [self save];
     }
     else
     {
-        return nil;
+        [self load];
+        photo.isFavorite = YES;
+        [self.photoFavArray addObject:photo];
+        [self save];
     }
 }
+
+
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
     return self.photosArray.count;
+}
+
+#pragma mark - Data Persistance
+- (NSURL *)documentsDirectory
+{
+    return [[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask].firstObject;
+}
+
+- (NSURL *)plist
+{
+    NSURL *plistPath = [[self documentsDirectory] URLByAppendingPathComponent:@"Photos.plist"];
+    return plistPath;
+}
+
+- (void)save
+{
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [self.photoFavArray writeToURL:[self plist] atomically:YES];
+    [defaults setObject:[NSDate date] forKey:kDateKey];
+    [defaults synchronize];
+}
+
+- (void)load
+{
+    NSURL *plistPath = [[self documentsDirectory] URLByAppendingPathComponent:@"Photos.plist"];
+    self.photoFavArray = [NSMutableArray arrayWithContentsOfURL:plistPath];
 }
 
 
