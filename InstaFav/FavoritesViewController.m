@@ -28,11 +28,6 @@
 {
     [super viewDidLoad];
     [self load];
-    // IF photoFavArray doesn't exist (=nil), create new one
-    if (!self.photoFavArray)
-    {
-        self.photoFavArray = [NSMutableArray new];
-    }
     [self.collectionView reloadData];
 }
 
@@ -57,6 +52,7 @@
     if ([self.photoFavArray[indexPath.row] isFavorite])
     {
         cell.imageView.image = [self.photoFavArray[indexPath.row] image];
+        cell.imageIsFavView.image = [self.photoFavArray[indexPath.row]getIndicatorImage];
         return cell;
     }
     else
@@ -64,9 +60,30 @@
         return cell;
     }
 }
+
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
     return self.photoFavArray.count;
+}
+
+-(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    Photo *photo = [self.photoFavArray objectAtIndex:indexPath.row];
+    if ([self.photoFavArray containsObject:photo])
+    {
+        photo.isFavorite = NO;
+        [self.photoFavArray removeObject:photo];
+        [self save];
+        [self.collectionView reloadData];
+    }
+    else
+    {
+        [self load];
+        photo.isFavorite = YES;
+        [self.photoFavArray addObject:photo];
+        [self save];
+        [self.collectionView reloadData];
+    }
 }
 
 
@@ -94,18 +111,30 @@
     [defaults synchronize];
 }
 
-- (void)load
+-(UIImage *)getIndicatorImage: (BOOL)isFav
 {
-    //If there's something in the plist, set photoFavArray to it
-    NSData *data = [NSData dataWithContentsOfURL:[self plist]];
-    self.photoFavArray = [NSKeyedUnarchiver unarchiveObjectWithData:data];
-
+    if (isFav)
+    {
+        return [UIImage imageNamed:@"favheart"];
+    }
+    else
+    {
+        return [UIImage imageNamed:@"heart"];
+    }
 }
 
+- (void)load
+{
+    NSData *data = [NSData dataWithContentsOfURL:[self plist]];
+    if (![NSData dataWithContentsOfURL:[self plist]])
+    {
+        self.photoFavArray = [NSMutableArray new];
+    }
+    else
+    {
+        self.photoFavArray = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+    }
 
-
-
-
-
+}
 
 @end

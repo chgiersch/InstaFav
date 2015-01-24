@@ -17,6 +17,7 @@
 
 - (instancetype)initWithDictionary:(NSDictionary *)dictionary;
 - (id)initWithCoder:(NSCoder *)decoder;
+- (UIImage *)getIndicatorImage;
 
 @property NSString *uniqueID;
 @property BOOL isFavorite;

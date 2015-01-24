@@ -33,10 +33,7 @@
 {
     [super viewDidLoad];
     self.photosArray = [NSMutableArray new];
-    if (!self.photoFavArray)
-    {
-        self.photoFavArray = [NSMutableArray new];
-    }
+    [self load];
     self.parser = [JSONParser new];
 
     //Default search is "cats". ^_^
@@ -81,6 +78,7 @@
 
     Photo *photo = self.photosArray[indexPath.item];
     cell.imageView.image = photo.image;
+    cell.imageIsFavView.image = [photo getIndicatorImage];
     return cell;
 }
 
@@ -89,10 +87,10 @@
     Photo *photo = [self.photosArray objectAtIndex:indexPath.row];
     if ([self.photoFavArray containsObject:photo])
     {
-        [self load];
         photo.isFavorite = NO;
         [self.photoFavArray removeObject:photo];
         [self save];
+        [self.collectionView reloadData];
     }
     else
     {
@@ -100,6 +98,7 @@
         photo.isFavorite = YES;
         [self.photoFavArray addObject:photo];
         [self save];
+        [self.collectionView reloadData];
     }
 }
 
@@ -141,7 +140,14 @@
 - (void)load
 {
     NSData *data = [NSData dataWithContentsOfURL:[self plist]];
-    self.photoFavArray = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+    if (![NSData dataWithContentsOfURL:[self plist]])
+    {
+        self.photoFavArray = [NSMutableArray new];
+    }
+    else
+    {
+        self.photoFavArray = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+    }
 }
 
 

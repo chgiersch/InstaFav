@@ -61,6 +61,7 @@
                                         </constraints>
                                         <size key="customSize" width="319" height="319"/>
                                         <connections>
+                                            <outlet property="imageIsFavView" destination="xsU-DJ-Oyu" id="1hf-UJ-u8M"/>
                                             <outlet property="imageView" destination="hwd-LN-isb" id="IGp-v7-3yM"/>
                                         </connections>
                                     </collectionViewCell>

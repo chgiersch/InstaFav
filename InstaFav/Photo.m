@@ -63,4 +63,16 @@
     return self;
 }
 
+-(UIImage *)getIndicatorImage
+{
+    if (self.isFavorite)
+    {
+        return [UIImage imageNamed:@"favheart"];
+    }
+    else
+    {
+        return [UIImage imageNamed:@"heart"];
+    }
+}
+
 @end
