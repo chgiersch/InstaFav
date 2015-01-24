@@ -19,7 +19,7 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Tuo-Yl-eT5">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="519"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="lMM-we-DkY">
                                     <size key="itemSize" width="319" height="319"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
@@ -74,10 +74,10 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="Tuo-Yl-eT5" firstAttribute="top" secondItem="kh9-bI-dsS" secondAttribute="top" id="YYD-Vm-KcZ"/>
-                            <constraint firstItem="Tuo-Yl-eT5" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" id="ijO-Ym-cv9"/>
-                            <constraint firstAttribute="trailing" secondItem="Tuo-Yl-eT5" secondAttribute="trailing" id="laQ-Dc-t64"/>
-                            <constraint firstAttribute="bottom" secondItem="Tuo-Yl-eT5" secondAttribute="bottom" id="qlQ-ZC-28o"/>
+                            <constraint firstItem="Tuo-Yl-eT5" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" constant="-16" id="32f-vq-eXA"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="Tuo-Yl-eT5" secondAttribute="trailing" constant="-16" id="5v1-bN-Ta3"/>
+                            <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="Tuo-Yl-eT5" secondAttribute="bottom" id="Nr5-pB-hao"/>
+                            <constraint firstItem="Tuo-Yl-eT5" firstAttribute="top" secondItem="kh9-bI-dsS" secondAttribute="topMargin" id="pmA-jc-rcg"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" systemItem="favorites" id="6M9-ED-Yns"/>
@@ -103,7 +103,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="W2G-nQ-Lmz">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="519"/>
                                 <connections>
                                     <outlet property="delegate" destination="whf-mc-0lc" id="VvO-XI-JDe"/>
                                 </connections>
@@ -111,13 +111,16 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="W2G-nQ-Lmz" firstAttribute="top" secondItem="NLO-4E-Rjz" secondAttribute="top" id="JwU-G1-2mJ"/>
-                            <constraint firstAttribute="bottom" secondItem="W2G-nQ-Lmz" secondAttribute="bottom" id="acg-PO-Qfa"/>
-                            <constraint firstItem="W2G-nQ-Lmz" firstAttribute="leading" secondItem="NLO-4E-Rjz" secondAttribute="leading" id="gCe-hY-awu"/>
-                            <constraint firstAttribute="trailing" secondItem="W2G-nQ-Lmz" secondAttribute="trailing" id="it7-aX-XyJ"/>
+                            <constraint firstItem="W2G-nQ-Lmz" firstAttribute="leading" secondItem="NLO-4E-Rjz" secondAttribute="leadingMargin" constant="-16" id="AMX-UL-6Qs"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="W2G-nQ-Lmz" secondAttribute="trailing" constant="-16" id="XWg-0U-WEU"/>
+                            <constraint firstItem="Yu9-xD-wwD" firstAttribute="top" secondItem="W2G-nQ-Lmz" secondAttribute="bottom" id="Ybk-eY-Vuj"/>
+                            <constraint firstItem="W2G-nQ-Lmz" firstAttribute="top" secondItem="NLO-4E-Rjz" secondAttribute="topMargin" id="iTJ-N1-ZtQ"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" selectedImage="trifoldMap_icon" systemItem="more" id="Q6u-fo-HjO"/>
+                    <connections>
+                        <outlet property="mapView" destination="W2G-nQ-Lmz" id="GVG-Rv-GYC"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HAA-P4-Zqr" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -142,8 +145,15 @@
                                     <outlet property="delegate" destination="bqw-gi-Lcc" id="RdD-6b-vVq"/>
                                 </connections>
                             </searchBar>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="lZB-nh-pu3">
-                                <rect key="frame" x="0.0" y="40" width="320" height="528"/>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="amw-ii-keZ">
+                                <rect key="frame" x="142" y="266" width="37" height="37"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="37" id="eoL-6j-dQL"/>
+                                    <constraint firstAttribute="width" constant="37" id="gfO-Zs-emE"/>
+                                </constraints>
+                            </activityIndicatorView>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="lZB-nh-pu3">
+                                <rect key="frame" x="0.0" y="44" width="320" height="475"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="hA1-fX-shf">
                                     <size key="itemSize" width="319" height="319"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
@@ -193,25 +203,18 @@
                                     <outlet property="delegate" destination="bqw-gi-Lcc" id="EYe-9Y-K42"/>
                                 </connections>
                             </collectionView>
-                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="amw-ii-keZ">
-                                <rect key="frame" x="142" y="266" width="37" height="37"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="37" id="eoL-6j-dQL"/>
-                                    <constraint firstAttribute="width" constant="37" id="gfO-Zs-emE"/>
-                                </constraints>
-                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="trailingMargin" secondItem="lZB-nh-pu3" secondAttribute="trailing" constant="-16" id="05u-rv-VNn"/>
                             <constraint firstItem="cb5-iC-RYh" firstAttribute="leading" secondItem="8dT-Wg-cF5" secondAttribute="leading" id="8XA-gd-vcS"/>
+                            <constraint firstItem="lZB-nh-pu3" firstAttribute="top" secondItem="cb5-iC-RYh" secondAttribute="bottom" id="9JU-Ww-Alf"/>
+                            <constraint firstItem="gwA-bE-LzN" firstAttribute="top" secondItem="lZB-nh-pu3" secondAttribute="bottom" id="CVo-wf-3Aj"/>
                             <constraint firstItem="cb5-iC-RYh" firstAttribute="top" secondItem="8dT-Wg-cF5" secondAttribute="top" id="XNk-Vw-GlV"/>
                             <constraint firstAttribute="centerY" secondItem="amw-ii-keZ" secondAttribute="centerY" id="Xhf-fV-K27"/>
                             <constraint firstAttribute="centerX" secondItem="amw-ii-keZ" secondAttribute="centerX" id="ZFK-jd-CHN"/>
                             <constraint firstAttribute="trailing" secondItem="cb5-iC-RYh" secondAttribute="trailing" id="clY-dh-zmF"/>
-                            <constraint firstItem="lZB-nh-pu3" firstAttribute="bottom" secondItem="8dT-Wg-cF5" secondAttribute="bottomMargin" id="iQS-Cv-16i"/>
-                            <constraint firstItem="lZB-nh-pu3" firstAttribute="leading" secondItem="8dT-Wg-cF5" secondAttribute="leadingMargin" constant="-16" id="kKa-o5-HnA"/>
-                            <constraint firstItem="lZB-nh-pu3" firstAttribute="top" secondItem="cb5-iC-RYh" secondAttribute="bottom" id="yIF-7T-NDm"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="lZB-nh-pu3" secondAttribute="trailing" constant="-16" id="hx5-NQ-iq3"/>
+                            <constraint firstItem="lZB-nh-pu3" firstAttribute="leading" secondItem="8dT-Wg-cF5" secondAttribute="leadingMargin" constant="-16" id="xwT-aY-li8"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" systemItem="search" id="eXZ-jX-qVv"/>

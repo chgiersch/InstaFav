@@ -21,6 +21,7 @@
     
     [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError)
     {
+        NSLog(@"%@", connectionError);
         NSDictionary *instagramData = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:nil];
         NSArray *instagramPostArray = instagramData[@"data"];
         for (NSDictionary *post in instagramPostArray)

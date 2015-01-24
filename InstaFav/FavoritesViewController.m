@@ -111,18 +111,6 @@
     [defaults synchronize];
 }
 
--(UIImage *)getIndicatorImage: (BOOL)isFav
-{
-    if (isFav)
-    {
-        return [UIImage imageNamed:@"favheart"];
-    }
-    else
-    {
-        return [UIImage imageNamed:@"heart"];
-    }
-}
-
 - (void)load
 {
     NSData *data = [NSData dataWithContentsOfURL:[self plist]];

@@ -85,6 +85,7 @@
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
     Photo *photo = [self.photosArray objectAtIndex:indexPath.row];
+#warning ******  Should probably search the ids instead, since every time we parse the JSON we create new Photo items, so this wouldn't work with hashtags that have fewer than 10 images ********
     if ([self.photoFavArray containsObject:photo])
     {
         photo.isFavorite = NO;
