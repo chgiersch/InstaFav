@@ -145,13 +145,6 @@
                                     <outlet property="delegate" destination="bqw-gi-Lcc" id="RdD-6b-vVq"/>
                                 </connections>
                             </searchBar>
-                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="amw-ii-keZ">
-                                <rect key="frame" x="142" y="266" width="37" height="37"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="37" id="eoL-6j-dQL"/>
-                                    <constraint firstAttribute="width" constant="37" id="gfO-Zs-emE"/>
-                                </constraints>
-                            </activityIndicatorView>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="lZB-nh-pu3">
                                 <rect key="frame" x="0.0" y="44" width="320" height="475"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="hA1-fX-shf">
@@ -203,6 +196,13 @@
                                     <outlet property="delegate" destination="bqw-gi-Lcc" id="EYe-9Y-K42"/>
                                 </connections>
                             </collectionView>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="amw-ii-keZ">
+                                <rect key="frame" x="142" y="266" width="37" height="37"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="37" id="eoL-6j-dQL"/>
+                                    <constraint firstAttribute="width" constant="37" id="gfO-Zs-emE"/>
+                                </constraints>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
