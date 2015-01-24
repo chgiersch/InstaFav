@@ -17,6 +17,8 @@
     url = [NSURL URLWithString:[NSString stringWithFormat:@"https://api.instagram.com/v1/tags/%@/media/recent?access_token=1080703211.c72c489.2beaba2c15ed41b58a2df695a4bf1d56", hashtag]];
 
     NSURLRequest * request = [NSURLRequest requestWithURL:url];
+
+    
     [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError)
     {
         NSDictionary *instagramData = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:nil];

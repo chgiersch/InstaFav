@@ -131,7 +131,6 @@
 
 - (void)save
 {
-    // Not saving to harddrive
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     NSData *data = [NSKeyedArchiver archivedDataWithRootObject:self.photoFavArray];
     [data writeToURL:[self plist] atomically:YES];  // This is saving a custom Photo class subclassing NSObject
@@ -141,15 +140,8 @@
 
 - (void)load
 {
-    //If there's something in the plist, set photoFavArray to it
-    if ([NSMutableArray arrayWithContentsOfURL:[self plist]])
-    {
-        self.photoFavArray = [NSMutableArray arrayWithContentsOfURL:[self plist]];
-    }
-    else
-    {
-        self.photoFavArray = [NSMutableArray new];
-    }
+    NSData *data = [NSData dataWithContentsOfURL:[self plist]];
+    self.photoFavArray = [NSKeyedUnarchiver unarchiveObjectWithData:data];
 }
 
 

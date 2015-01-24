@@ -40,6 +40,15 @@
                                                         <constraint firstAttribute="width" secondItem="hwd-LN-isb" secondAttribute="height" multiplier="1:1" id="ztE-Ia-bhf"/>
                                                     </constraints>
                                                 </imageView>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="xsU-DJ-Oyu">
+                                                    <rect key="frame" x="281" y="281" width="30" height="30"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="30" id="4iJ-XY-mnJ"/>
+                                                        <constraint firstAttribute="height" constant="30" id="LnI-pI-BiL"/>
+                                                        <constraint firstAttribute="width" constant="30" id="hc9-aQ-66d"/>
+                                                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="30" id="l73-Of-fqm"/>
+                                                    </constraints>
+                                                </imageView>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
@@ -47,6 +56,8 @@
                                             <constraint firstAttribute="trailingMargin" secondItem="hwd-LN-isb" secondAttribute="trailing" constant="-8" id="Afl-vQ-r9s"/>
                                             <constraint firstItem="hwd-LN-isb" firstAttribute="leading" secondItem="EJR-rx-3xb" secondAttribute="leadingMargin" constant="-8" id="XsF-AE-76r"/>
                                             <constraint firstItem="hwd-LN-isb" firstAttribute="top" secondItem="EJR-rx-3xb" secondAttribute="topMargin" constant="-8" id="dfp-AN-sxA"/>
+                                            <constraint firstItem="xsU-DJ-Oyu" firstAttribute="bottom" secondItem="EJR-rx-3xb" secondAttribute="bottomMargin" id="vio-mE-q9Y"/>
+                                            <constraint firstItem="xsU-DJ-Oyu" firstAttribute="trailing" secondItem="EJR-rx-3xb" secondAttribute="trailingMargin" id="vwZ-6d-Zq0"/>
                                         </constraints>
                                         <size key="customSize" width="319" height="319"/>
                                         <connections>
@@ -152,16 +163,26 @@
                                                         <constraint firstAttribute="width" secondItem="AlF-4D-8YH" secondAttribute="height" multiplier="1:1" id="YVt-5e-DWO"/>
                                                     </constraints>
                                                 </imageView>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="b7W-u0-mpF">
+                                                    <rect key="frame" x="281" y="281" width="30" height="30"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="30" id="TZi-b9-bxP"/>
+                                                        <constraint firstAttribute="height" constant="30" id="kA5-wx-vRb"/>
+                                                    </constraints>
+                                                </imageView>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
                                         <constraints>
                                             <constraint firstAttribute="trailingMargin" secondItem="AlF-4D-8YH" secondAttribute="trailing" constant="-8" id="E3z-eh-133"/>
+                                            <constraint firstItem="b7W-u0-mpF" firstAttribute="trailing" secondItem="flK-Zx-Ku7" secondAttribute="trailingMargin" id="Oat-Ly-agX"/>
                                             <constraint firstItem="AlF-4D-8YH" firstAttribute="top" secondItem="flK-Zx-Ku7" secondAttribute="topMargin" constant="-8" id="hgo-8U-hQr"/>
                                             <constraint firstItem="AlF-4D-8YH" firstAttribute="leading" secondItem="flK-Zx-Ku7" secondAttribute="leadingMargin" constant="-8" id="qSR-p4-3yj"/>
+                                            <constraint firstItem="b7W-u0-mpF" firstAttribute="bottom" secondItem="flK-Zx-Ku7" secondAttribute="bottomMargin" id="xAr-fJ-Xan"/>
                                         </constraints>
                                         <size key="customSize" width="319" height="319"/>
                                         <connections>
+                                            <outlet property="imageIsFavView" destination="b7W-u0-mpF" id="v3o-AE-J9i"/>
                                             <outlet property="imageView" destination="AlF-4D-8YH" id="ZzH-ja-RAi"/>
                                         </connections>
                                     </collectionViewCell>

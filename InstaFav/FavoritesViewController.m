@@ -36,6 +36,18 @@
     [self.collectionView reloadData];
 }
 
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    [self load];
+    // IF photoFavArray doesn't exist (=nil), create new one
+    if (!self.photoFavArray)
+    {
+        self.photoFavArray = [NSMutableArray new];
+    }
+    [self.collectionView reloadData];
+
+}
 
 //----------------------------------    Collection View    -----------------------------------
 #pragma mark - Collection View
