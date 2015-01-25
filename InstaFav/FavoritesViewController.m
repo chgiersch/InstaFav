@@ -7,12 +7,16 @@
 //
 
 #import "FavoritesViewController.h"
+
 #import <Social/Social.h>
+#import <MessageUI/MessageUI.h>
+#import <MessageUI/MFMailComposeViewController.h>
+
 #import "Photo.h"
 #import "CustomCollectionViewCell.h"
 #import "SavedDataAccessor.h"
 
-@interface FavoritesViewController () <UICollectionViewDataSource, UICollectionViewDelegate>
+@interface FavoritesViewController () <UICollectionViewDataSource, UICollectionViewDelegate, MFMailComposeViewControllerDelegate>
 
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 @property NSMutableArray *photoFavArray;
@@ -45,8 +49,8 @@
 
 }
 
-//----------------------------------    Collection View    -----------------------------------
-#pragma mark - Collection View
+//----------------------------------    Collection View Methods   -----------------------------------
+#pragma mark - Collection View Methods
 - (CustomCollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     CustomCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"ImageCell" forIndexPath:indexPath];
@@ -114,6 +118,49 @@
                                   otherButtonTitles:nil];
         [alertView show];
     }
+}
+
+#warning ****** Figure out when/where to put this method. Will the e-mail button be on the customCollectionViewCell or the view controller? ******
+- (void)emailFavImage: (Photo *)photo
+{
+    if ([MFMailComposeViewController canSendMail])
+    {
+        MFMailComposeViewController *mail = [[MFMailComposeViewController alloc] init];
+        mail.mailComposeDelegate = self;
+        [mail setSubject:@"InstaFav"];
+        [mail setMessageBody:@"Look at this picture I InstaFaved!" isHTML:NO];
+        [mail setToRecipients:@[@"testingEmail@example.com"]];
+        NSData *myData = UIImagePNGRepresentation(photo.image);
+        [mail addAttachmentData:myData mimeType:@"image/png" fileName:@"InstaFavImage"];
+        [self presentViewController:mail animated:YES completion:NULL];
+    }
+    else
+    {
+        NSLog(@"This device cannot send email");
+    }
+}
+
+- (void)mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error
+{
+    switch (result) {
+        case MFMailComposeResultSent:
+            NSLog(@"You sent the email.");
+            break;
+        case MFMailComposeResultSaved:
+            NSLog(@"You saved a draft of this email");
+            break;
+        case MFMailComposeResultCancelled:
+            NSLog(@"You cancelled sending this email.");
+            break;
+        case MFMailComposeResultFailed:
+            NSLog(@"Mail failed:  An error occurred when trying to compose this email");
+            break;
+        default:
+            NSLog(@"An error occurred when trying to compose this email");
+            break;
+    }
+
+    [self dismissViewControllerAnimated:YES completion:NULL];
 }
 
 @end

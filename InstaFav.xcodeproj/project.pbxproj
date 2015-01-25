@@ -24,6 +24,7 @@
 		60ABD08E1A7481E20048EA58 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 60ABD08D1A7481E20048EA58 /* SystemConfiguration.framework */; };
 		60ABD0911A74AFD30048EA58 /* SavedDataAccessor.m in Sources */ = {isa = PBXBuildFile; fileRef = 60ABD0901A74AFD30048EA58 /* SavedDataAccessor.m */; };
 		60ABD0931A74C7130048EA58 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 60ABD0921A74C7130048EA58 /* Social.framework */; };
+		60ABD0951A74CA420048EA58 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 60ABD0941A74CA420048EA58 /* MessageUI.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -67,6 +68,7 @@
 		60ABD08F1A74AFD30048EA58 /* SavedDataAccessor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SavedDataAccessor.h; path = InstaFav/SavedDataAccessor.h; sourceTree = "<group>"; };
 		60ABD0901A74AFD30048EA58 /* SavedDataAccessor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SavedDataAccessor.m; path = InstaFav/SavedDataAccessor.m; sourceTree = "<group>"; };
 		60ABD0921A74C7130048EA58 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
+		60ABD0941A74CA420048EA58 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -74,6 +76,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				60ABD0951A74CA420048EA58 /* MessageUI.framework in Frameworks */,
 				60ABD0931A74C7130048EA58 /* Social.framework in Frameworks */,
 				60ABD08E1A7481E20048EA58 /* SystemConfiguration.framework in Frameworks */,
 				6076D9F51A71C22D000574C4 /* MapKit.framework in Frameworks */,
@@ -93,6 +96,7 @@
 		0FC09BE71A71AAC50081C227 = {
 			isa = PBXGroup;
 			children = (
+				60ABD0941A74CA420048EA58 /* MessageUI.framework */,
 				60ABD0921A74C7130048EA58 /* Social.framework */,
 				60ABD08D1A7481E20048EA58 /* SystemConfiguration.framework */,
 				6076D9F41A71C22D000574C4 /* MapKit.framework */,

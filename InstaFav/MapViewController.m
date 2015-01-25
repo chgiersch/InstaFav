@@ -39,7 +39,7 @@
     }
     else
     {
-        //display something like: "Internet Connection Unavailable" in the View Controller (maybe an AlertView?)
+#warning ****** display something like: "Internet Connection Unavailable" in the View Controller (maybe an AlertView?) ******
         NSLog(@"Internet Unavailable.");
     }
 }

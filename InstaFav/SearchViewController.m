@@ -50,7 +50,7 @@
     }
     else
     {
-        //display something like: "Internet Connection Unavailable" in the View Controller (maybe an AlertView?)
+#warning ****** display something like: "Internet Connection Unavailable" in the View Controller (maybe an AlertView?) ******
         NSLog(@"Internet Unavailable.");
         [self.spinner stopAnimating];
     }
@@ -94,8 +94,8 @@
     NSLog(@"Lost Network Connection");
 }
 
-//----------------------------------    Collection View    -----------------------------------
-#pragma mark - Collection View
+//----------------------------------    Collection View Methods   -----------------------------------
+#pragma mark - Collection View Methods
 - (CustomCollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     CustomCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"ImageCell" forIndexPath:indexPath];
