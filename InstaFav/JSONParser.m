@@ -26,8 +26,12 @@
              NSArray *instagramPostArray = instagramData[@"data"];
              for (NSDictionary *post in instagramPostArray)
              {
-                 Photo *newPhoto = [[Photo alloc] initWithDictionary:post];
-                 [photosArray addObject:newPhoto];
+                 //Make sure post is an image and not a video before adding to photosArray
+                 if ([post[@"type"] isEqualToString: @"image"])
+                 {
+                     Photo *newPhoto = [[Photo alloc] initWithDictionary:post];
+                     [photosArray addObject:newPhoto];
+                 }
              }
 
              [self.delegate didFinishJSONSearchWithMutableArray:photosArray];

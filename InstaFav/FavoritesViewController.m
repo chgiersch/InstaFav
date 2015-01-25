@@ -7,6 +7,7 @@
 //
 
 #import "FavoritesViewController.h"
+#import <Social/Social.h>
 #import "Photo.h"
 #import "CustomCollectionViewCell.h"
 #import "SavedDataAccessor.h"
@@ -91,6 +92,28 @@
     photo.isFavorite = YES;
     [array addObject:photo];
     return array;
+}
+
+#warning ****** Figure out when/where to put this method. Will the tweet button be on the customCollectionViewCell or the view controller? ******
+- (void)tweetFavImage: (Photo *)photo
+{
+    if ([SLComposeViewController isAvailableForServiceType:SLServiceTypeTwitter])
+    {
+        SLComposeViewController *tweetSheet = [SLComposeViewController composeViewControllerForServiceType:SLServiceTypeTwitter];
+        [tweetSheet setInitialText:@"Tweeting from InstaFav app! :)"];
+        [tweetSheet addImage:photo.image];
+        [self presentViewController:tweetSheet animated:YES completion:nil];
+    }
+    else
+    {
+        UIAlertView *alertView = [[UIAlertView alloc]
+                                  initWithTitle:@"Sorry"
+                                  message:@"You can't send a tweet right now, make sure your device has an internet connection and you have at least one Twitter account setup"
+                                  delegate:self
+                                  cancelButtonTitle:@"OK"
+                                  otherButtonTitles:nil];
+        [alertView show];
+    }
 }
 
 @end
