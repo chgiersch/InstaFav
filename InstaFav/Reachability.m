@@ -115,7 +115,6 @@ static void TMReachabilityCallback(SCNetworkReachabilityRef target, SCNetworkRea
         
         return reachability;
     }
-    
     return nil;
 }
 

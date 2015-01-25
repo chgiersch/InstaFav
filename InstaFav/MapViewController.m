@@ -10,11 +10,10 @@
 #import "Reachability.h"
 #import "SavedDataAccessor.h"
 
-#define kDateKey @"dateSaved"
-
 @interface MapViewController ()
 @property (strong, nonatomic) IBOutlet MKMapView *mapView;
 @property Reachability *internetConnectionReach;
+@property SavedDataAccessor *dataAccessor;
 
 @end
 
@@ -23,7 +22,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [self load];
+    self.photoFavArray = [self.dataAccessor retrieveArrayFromFile];
+    
     if ([self.internetConnectionReach isReachable])
     {
         for (Photo *photo in self.photoFavArray)
@@ -42,44 +42,6 @@
         //display something like: "Internet Connection Unavailable" in the View Controller (maybe an AlertView?)
         NSLog(@"Internet Unavailable.");
     }
-}
-
-//----------------------------------     Data Persistance    -----------------------------------
-#warning ******     Extract to custom class later PLEASE :)     ******
-#pragma mark - Data Persistance
-- (NSURL *)documentsDirectory
-{
-    return [[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask].firstObject;
-}
-
-- (NSURL *)plist
-{
-    NSURL *plistPath = [[self documentsDirectory] URLByAppendingPathComponent:@"Photos.plist"];
-    return plistPath;
-}
-
-- (void)save
-{
-    // Not saving to harddrive
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    NSData *data = [NSKeyedArchiver archivedDataWithRootObject:self.photoFavArray];
-    [data writeToURL:[self plist] atomically:YES];  // This is saving a custom Photo class subclassing NSObject
-    [defaults setObject:[NSDate date] forKey:kDateKey];
-    [defaults synchronize];
-}
-
-- (void)load
-{
-    NSData *data = [NSData dataWithContentsOfURL:[self plist]];
-    if (![NSData dataWithContentsOfURL:[self plist]])
-    {
-        self.photoFavArray = [NSMutableArray new];
-    }
-    else
-    {
-        self.photoFavArray = [NSKeyedUnarchiver unarchiveObjectWithData:data];
-    }
-
 }
 
 

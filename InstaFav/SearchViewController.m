@@ -13,8 +13,6 @@
 #import "CustomCollectionViewCell.h"
 #import "SavedDataAccessor.h"
 
-#define kDateKey @"dateSaved"
-
 @interface SearchViewController () <UICollectionViewDataSource, UICollectionViewDelegate, ParserDelegate, UISearchBarDelegate>
 
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
@@ -111,22 +109,10 @@
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
     Photo *photo = [self.photosArray objectAtIndex:indexPath.row];
-#warning ******  Should probably search the ids instead, since every time we parse the JSON we create new Photo items, so this wouldn't work with hashtags that have fewer than 10 images ********
-    if ([self.photoFavArray containsObject:photo])
-    {
-        photo.isFavorite = NO;
-        [self.photoFavArray removeObject:photo];
-        [self.dataAccessor saveArrayToFile:self.photoFavArray];
-        [self.collectionView reloadData];
-    }
-    else
-    {
-        self.photoFavArray = [self.dataAccessor retrieveArrayFromFile];
-        photo.isFavorite = YES;
-        [self.photoFavArray addObject:photo];
-        [self.dataAccessor saveArrayToFile:self.photoFavArray];
-        [self.collectionView reloadData];
-    }
+    //retrieves array from plish and adds/removes the photo depending on if it's favorited or not
+    self.photoFavArray = [self addOrRemove:photo fromFavArray:[self.dataAccessor retrieveArrayFromFile]];
+    [self.dataAccessor saveArrayToFile:self.photoFavArray];
+    [self.collectionView reloadData];
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
@@ -139,6 +125,24 @@
     {
         return 10;
     }
+}
+
+- (NSMutableArray *)addOrRemove: (Photo *)photo fromFavArray: (NSMutableArray *)array
+{
+    //Goes through all photos in array and compares the Photo object's uniqueID
+    for (Photo *favedPhoto in array)
+    {
+        //If photo has already been favorited
+        if ([favedPhoto.uniqueID isEqualToString: photo.uniqueID])
+        {
+            photo.isFavorite = NO;
+            [array removeObject:favedPhoto];
+            return array;
+        }
+    }
+    photo.isFavorite = YES;
+    [array addObject:photo];
+    return array;
 }
 
 @end

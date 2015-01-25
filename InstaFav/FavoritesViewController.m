@@ -11,8 +11,6 @@
 #import "CustomCollectionViewCell.h"
 #import "SavedDataAccessor.h"
 
-#define kDateKey @"dateSaved"
-
 @interface FavoritesViewController () <UICollectionViewDataSource, UICollectionViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
@@ -71,21 +69,28 @@
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
     Photo *photo = [self.photoFavArray objectAtIndex:indexPath.row];
-    if ([self.photoFavArray containsObject:photo])
+    //retrieves array from plish and adds/removes the photo depending on if it's favorited or not
+    self.photoFavArray = [self addOrRemove:photo fromFavArray:[self.dataAccessor retrieveArrayFromFile]];
+    [self.dataAccessor saveArrayToFile:self.photoFavArray];
+    [self.collectionView reloadData];
+}
+
+- (NSMutableArray *)addOrRemove: (Photo *)photo fromFavArray: (NSMutableArray *)array
+{
+    //Goes through all photos in array and compares the Photo object's uniqueID
+    for (Photo *favedPhoto in array)
     {
-        photo.isFavorite = NO;
-        [self.photoFavArray removeObject:photo];
-        [self.dataAccessor saveArrayToFile:self.photoFavArray];
-        [self.collectionView reloadData];
+        //If photo has already been favorited
+        if ([favedPhoto.uniqueID isEqualToString: photo.uniqueID])
+        {
+            photo.isFavorite = NO;
+            [array removeObject:favedPhoto];
+            return array;
+        }
     }
-    else
-    {
-        self.photoFavArray = [self.dataAccessor retrieveArrayFromFile];
-        photo.isFavorite = YES;
-        [self.photoFavArray addObject:photo];
-        [self.dataAccessor saveArrayToFile:self.photoFavArray];
-        [self.collectionView reloadData];
-    }
+    photo.isFavorite = YES;
+    [array addObject:photo];
+    return array;
 }
 
 @end
