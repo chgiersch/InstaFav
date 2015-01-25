@@ -22,6 +22,7 @@
 		6076D9F51A71C22D000574C4 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6076D9F41A71C22D000574C4 /* MapKit.framework */; };
 		60ABD08C1A7480F70048EA58 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 60ABD08B1A7480F70048EA58 /* Reachability.m */; };
 		60ABD08E1A7481E20048EA58 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 60ABD08D1A7481E20048EA58 /* SystemConfiguration.framework */; };
+		60ABD0911A74AFD30048EA58 /* SavedDataAccessor.m in Sources */ = {isa = PBXBuildFile; fileRef = 60ABD0901A74AFD30048EA58 /* SavedDataAccessor.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -62,6 +63,8 @@
 		60ABD08A1A7480F70048EA58 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Reachability.h; path = InstaFav/Reachability.h; sourceTree = "<group>"; };
 		60ABD08B1A7480F70048EA58 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Reachability.m; path = InstaFav/Reachability.m; sourceTree = "<group>"; };
 		60ABD08D1A7481E20048EA58 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		60ABD08F1A74AFD30048EA58 /* SavedDataAccessor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SavedDataAccessor.h; path = InstaFav/SavedDataAccessor.h; sourceTree = "<group>"; };
+		60ABD0901A74AFD30048EA58 /* SavedDataAccessor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SavedDataAccessor.m; path = InstaFav/SavedDataAccessor.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -160,6 +163,8 @@
 			children = (
 				6076D9EE1A71BDB5000574C4 /* JSONParser.h */,
 				6076D9EF1A71BDB5000574C4 /* JSONParser.m */,
+				60ABD08F1A74AFD30048EA58 /* SavedDataAccessor.h */,
+				60ABD0901A74AFD30048EA58 /* SavedDataAccessor.m */,
 				6076D9F01A71BDB5000574C4 /* Photo.h */,
 				6076D9F11A71BDB5000574C4 /* Photo.m */,
 				60ABD08A1A7480F70048EA58 /* Reachability.h */,
@@ -306,6 +311,7 @@
 				0FC09C1F1A71AF180081C227 /* SearchViewController.m in Sources */,
 				0FC09BF61A71AAC50081C227 /* main.m in Sources */,
 				60ABD08C1A7480F70048EA58 /* Reachability.m in Sources */,
+				60ABD0911A74AFD30048EA58 /* SavedDataAccessor.m in Sources */,
 				0FC09C2C1A71CCDC0081C227 /* CustomCollectionViewCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

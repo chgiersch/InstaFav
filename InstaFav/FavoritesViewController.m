@@ -9,6 +9,7 @@
 #import "FavoritesViewController.h"
 #import "Photo.h"
 #import "CustomCollectionViewCell.h"
+#import "SavedDataAccessor.h"
 
 #define kDateKey @"dateSaved"
 
@@ -16,7 +17,7 @@
 
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 @property NSMutableArray *photoFavArray;
-
+@property SavedDataAccessor *dataAccessor;
 
 @end
 
@@ -27,14 +28,15 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [self load];
+    self.dataAccessor = [SavedDataAccessor new];
+    self.photoFavArray = [self.dataAccessor retrieveArrayFromFile];
     [self.collectionView reloadData];
 }
 
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
-    [self load];
+    self.photoFavArray = [self.dataAccessor retrieveArrayFromFile];
     // IF photoFavArray doesn't exist (=nil), create new one
     if (!self.photoFavArray)
     {
@@ -73,56 +75,17 @@
     {
         photo.isFavorite = NO;
         [self.photoFavArray removeObject:photo];
-        [self save];
+        [self.dataAccessor saveArrayToFile:self.photoFavArray];
         [self.collectionView reloadData];
     }
     else
     {
-        [self load];
+        self.photoFavArray = [self.dataAccessor retrieveArrayFromFile];
         photo.isFavorite = YES;
         [self.photoFavArray addObject:photo];
-        [self save];
+        [self.dataAccessor saveArrayToFile:self.photoFavArray];
         [self.collectionView reloadData];
     }
-}
-
-
-//----------------------------------     Data Persistance    -----------------------------------
-#warning ******     Extract to custom class later PLEASE :)     ******
-#pragma mark - Data Persistance
-- (NSURL *)documentsDirectory
-{
-    return [[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask].firstObject;
-}
-
-- (NSURL *)plist
-{
-    NSURL *plistPath = [[self documentsDirectory] URLByAppendingPathComponent:@"Photos.plist"];
-    return plistPath;
-}
-
-- (void)save
-{
-    // Not saving to harddrive
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    NSData *data = [NSKeyedArchiver archivedDataWithRootObject:self.photoFavArray];
-    [data writeToURL:[self plist] atomically:YES];  // This is saving a custom Photo class subclassing NSObject
-    [defaults setObject:[NSDate date] forKey:kDateKey];
-    [defaults synchronize];
-}
-
-- (void)load
-{
-    NSData *data = [NSData dataWithContentsOfURL:[self plist]];
-    if (![NSData dataWithContentsOfURL:[self plist]])
-    {
-        self.photoFavArray = [NSMutableArray new];
-    }
-    else
-    {
-        self.photoFavArray = [NSKeyedUnarchiver unarchiveObjectWithData:data];
-    }
-
 }
 
 @end

@@ -11,6 +11,7 @@
 #import "JSONParser.h"
 #import "Photo.h"
 #import "CustomCollectionViewCell.h"
+#import "SavedDataAccessor.h"
 
 #define kDateKey @"dateSaved"
 
@@ -25,6 +26,7 @@
 @property NSString *hashtag;
 @property JSONParser *parser;
 @property Reachability *internetConnectionReach;
+@property SavedDataAccessor *dataAccessor;
 
 @end
 
@@ -35,7 +37,8 @@
 {
     [super viewDidLoad];
     self.photosArray = [NSMutableArray new];
-    [self load];
+    self.dataAccessor = [SavedDataAccessor new];
+    self.photoFavArray = [self.dataAccessor retrieveArrayFromFile];
     self.parser = [JSONParser new];
 
     //Default search is "cats". ^_^
@@ -113,15 +116,15 @@
     {
         photo.isFavorite = NO;
         [self.photoFavArray removeObject:photo];
-        [self save];
+        [self.dataAccessor saveArrayToFile:self.photoFavArray];
         [self.collectionView reloadData];
     }
     else
     {
-        [self load];
+        self.photoFavArray = [self.dataAccessor retrieveArrayFromFile];
         photo.isFavorite = YES;
         [self.photoFavArray addObject:photo];
-        [self save];
+        [self.dataAccessor saveArrayToFile:self.photoFavArray];
         [self.collectionView reloadData];
     }
 }
@@ -137,43 +140,5 @@
         return 10;
     }
 }
-
-
-//----------------------------------    Data Persistance    -----------------------------------
-#pragma mark - Data Persistance
-- (NSURL *)documentsDirectory
-{
-    return [[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask].firstObject;
-}
-
-- (NSURL *)plist
-{
-    NSURL *plistPath = [[self documentsDirectory] URLByAppendingPathComponent:@"Photos.plist"];
-    return plistPath;
-}
-
-- (void)save
-{
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    NSData *data = [NSKeyedArchiver archivedDataWithRootObject:self.photoFavArray];
-    [data writeToURL:[self plist] atomically:YES];  // This is saving a custom Photo class subclassing NSObject
-    [defaults setObject:[NSDate date] forKey:kDateKey];
-    [defaults synchronize];
-}
-
-- (void)load
-{
-    NSData *data = [NSData dataWithContentsOfURL:[self plist]];
-    if (![NSData dataWithContentsOfURL:[self plist]])
-    {
-        self.photoFavArray = [NSMutableArray new];
-    }
-    else
-    {
-        self.photoFavArray = [NSKeyedUnarchiver unarchiveObjectWithData:data];
-    }
-}
-
-
 
 @end
