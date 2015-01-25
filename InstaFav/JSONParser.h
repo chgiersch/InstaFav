@@ -12,14 +12,16 @@
 @protocol ParserDelegate <NSObject>
 
 - (void)didFinishJSONSearchWithMutableArray:(NSMutableArray *)mutableArray;
+- (void)lostNetworkConnection;
 
 @end
 
 @interface JSONParser : NSObject
 
--(void)getImagesFromHashtagSearch:(NSString *)hashtag;
-
 @property (nonatomic, weak) id<ParserDelegate> delegate;
+
+- (void)getImagesFromHashtagSearch:(NSString *)hashtag;
+
 
 @end
 

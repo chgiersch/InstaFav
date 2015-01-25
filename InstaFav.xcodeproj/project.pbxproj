@@ -20,6 +20,8 @@
 		6076D9F21A71BDB5000574C4 /* JSONParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 6076D9EF1A71BDB5000574C4 /* JSONParser.m */; };
 		6076D9F31A71BDB5000574C4 /* Photo.m in Sources */ = {isa = PBXBuildFile; fileRef = 6076D9F11A71BDB5000574C4 /* Photo.m */; };
 		6076D9F51A71C22D000574C4 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6076D9F41A71C22D000574C4 /* MapKit.framework */; };
+		60ABD08C1A7480F70048EA58 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 60ABD08B1A7480F70048EA58 /* Reachability.m */; };
+		60ABD08E1A7481E20048EA58 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 60ABD08D1A7481E20048EA58 /* SystemConfiguration.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,6 +59,9 @@
 		6076D9F01A71BDB5000574C4 /* Photo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Photo.h; path = InstaFav/Photo.h; sourceTree = "<group>"; };
 		6076D9F11A71BDB5000574C4 /* Photo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Photo.m; path = InstaFav/Photo.m; sourceTree = "<group>"; };
 		6076D9F41A71C22D000574C4 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		60ABD08A1A7480F70048EA58 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Reachability.h; path = InstaFav/Reachability.h; sourceTree = "<group>"; };
+		60ABD08B1A7480F70048EA58 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Reachability.m; path = InstaFav/Reachability.m; sourceTree = "<group>"; };
+		60ABD08D1A7481E20048EA58 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,6 +69,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				60ABD08E1A7481E20048EA58 /* SystemConfiguration.framework in Frameworks */,
 				6076D9F51A71C22D000574C4 /* MapKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -81,6 +87,7 @@
 		0FC09BE71A71AAC50081C227 = {
 			isa = PBXGroup;
 			children = (
+				60ABD08D1A7481E20048EA58 /* SystemConfiguration.framework */,
 				6076D9F41A71C22D000574C4 /* MapKit.framework */,
 				0FC09BF21A71AAC50081C227 /* InstaFav */,
 				0FC09C0C1A71AAC50081C227 /* InstaFavTests */,
@@ -155,6 +162,8 @@
 				6076D9EF1A71BDB5000574C4 /* JSONParser.m */,
 				6076D9F01A71BDB5000574C4 /* Photo.h */,
 				6076D9F11A71BDB5000574C4 /* Photo.m */,
+				60ABD08A1A7480F70048EA58 /* Reachability.h */,
+				60ABD08B1A7480F70048EA58 /* Reachability.m */,
 				0FC09C2A1A71CCDC0081C227 /* CustomCollectionViewCell.h */,
 				0FC09C2B1A71CCDC0081C227 /* CustomCollectionViewCell.m */,
 			);
@@ -296,6 +305,7 @@
 				0FC09C221A71AF8B0081C227 /* MapViewController.m in Sources */,
 				0FC09C1F1A71AF180081C227 /* SearchViewController.m in Sources */,
 				0FC09BF61A71AAC50081C227 /* main.m in Sources */,
+				60ABD08C1A7480F70048EA58 /* Reachability.m in Sources */,
 				0FC09C2C1A71CCDC0081C227 /* CustomCollectionViewCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

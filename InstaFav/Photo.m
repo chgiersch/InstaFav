@@ -36,7 +36,7 @@
     return self;
 }
 
--(void)encodeWithCoder:(NSCoder *)encoder
+- (void)encodeWithCoder:(NSCoder *)encoder
 {
     [encoder encodeObject:self.uniqueID forKey:@"uniqueID"];
     [encoder encodeBool:self.isFavorite forKey:@"isFavorite"];
@@ -63,7 +63,7 @@
     return self;
 }
 
--(UIImage *)getIndicatorImage
+- (UIImage *)getIndicatorImage
 {
     if (self.isFavorite)
     {

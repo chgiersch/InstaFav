@@ -13,7 +13,7 @@
 
 @interface Photo : NSObject <NSCoding>
 
--(void)encodeWithCoder:(NSCoder *)encoder;
+- (void)encodeWithCoder:(NSCoder *)encoder;
 
 - (instancetype)initWithDictionary:(NSDictionary *)dictionary;
 - (id)initWithCoder:(NSCoder *)decoder;

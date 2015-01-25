@@ -66,7 +66,7 @@
     return self.photoFavArray.count;
 }
 
--(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
     Photo *photo = [self.photoFavArray objectAtIndex:indexPath.row];
     if ([self.photoFavArray containsObject:photo])

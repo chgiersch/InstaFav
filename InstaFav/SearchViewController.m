@@ -7,6 +7,7 @@
 //
 
 #import "SearchViewController.h"
+#import "Reachability.h"
 #import "JSONParser.h"
 #import "Photo.h"
 #import "CustomCollectionViewCell.h"
@@ -23,6 +24,7 @@
 
 @property NSString *hashtag;
 @property JSONParser *parser;
+@property Reachability *internetConnectionReach;
 
 @end
 
@@ -39,15 +41,29 @@
     //Default search is "cats". ^_^
     self.hashtag = @"cats";
     self.parser.delegate = self;
-    [self.parser getImagesFromHashtagSearch:self.hashtag];
-    [self.spinner startAnimating];
-
+    self.internetConnectionReach = [Reachability reachabilityForInternetConnection];
+    if ([self.internetConnectionReach isReachable])
+    {
+        [self.parser getImagesFromHashtagSearch:self.hashtag];
+        [self.spinner startAnimating];
+    }
+    else
+    {
+        //display something like: "Internet Connection Unavailable" in the View Controller (maybe an AlertView?)
+        NSLog(@"Internet Unavailable.");
+        [self.spinner stopAnimating];
+    }
 }
 
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    [self.collectionView reloadData];
+}
 
 //-----------------------------    Search Bar Delegate Method    -----------------------------------
 #pragma mark - Search Bar Delegate Method
--(void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
+- (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
 {
     NSString *searchTerm = searchBar.text;
     NSCharacterSet *set = [NSCharacterSet whitespaceCharacterSet];
@@ -61,13 +77,20 @@
     }
 }
 
-//-------------------------------    JSON Parser Delegate    -----------------------------------
+//-------------------------------    JSON Parser Delegate Methods    -----------------------------------
 #pragma mark - JSON Parser
 - (void)didFinishJSONSearchWithMutableArray:(NSMutableArray *)mutableArray
 {
     [self.spinner stopAnimating];
     self.photosArray = mutableArray;
     [self.collectionView reloadData];
+}
+
+- (void)lostNetworkConnection
+{
+    [self.spinner stopAnimating];
+    //Display "Lost Network Connection. Try again" or something.
+    NSLog(@"Lost Network Connection");
 }
 
 //----------------------------------    Collection View    -----------------------------------
@@ -82,7 +105,7 @@
     return cell;
 }
 
--(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
     Photo *photo = [self.photosArray objectAtIndex:indexPath.row];
 #warning ******  Should probably search the ids instead, since every time we parse the JSON we create new Photo items, so this wouldn't work with hashtags that have fewer than 10 images ********
