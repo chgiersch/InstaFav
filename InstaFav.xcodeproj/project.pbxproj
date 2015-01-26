@@ -8,10 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		0F0E3FDB1A75EDA2008035D5 /* ImagePointAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F0E3FDA1A75EDA2008035D5 /* ImagePointAnnotation.m */; };
+		0F0E3FDD1A75F619008035D5 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0F0E3FDC1A75F619008035D5 /* Images.xcassets */; };
 		0FC09BF61A71AAC50081C227 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FC09BF51A71AAC50081C227 /* main.m */; };
 		0FC09BF91A71AAC50081C227 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FC09BF81A71AAC50081C227 /* AppDelegate.m */; };
 		0FC09BFF1A71AAC50081C227 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0FC09BFD1A71AAC50081C227 /* Main.storyboard */; };
-		0FC09C011A71AAC50081C227 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0FC09C001A71AAC50081C227 /* Images.xcassets */; };
 		0FC09C041A71AAC50081C227 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0FC09C021A71AAC50081C227 /* LaunchScreen.xib */; };
 		0FC09C101A71AAC50081C227 /* InstaFavTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FC09C0F1A71AAC50081C227 /* InstaFavTests.m */; };
 		0FC09C1B1A71ABD80081C227 /* FavoritesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FC09C1A1A71ABD80081C227 /* FavoritesViewController.m */; };
@@ -42,13 +42,13 @@
 /* Begin PBXFileReference section */
 		0F0E3FD91A75EDA2008035D5 /* ImagePointAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ImagePointAnnotation.h; path = InstaFav/ImagePointAnnotation.h; sourceTree = "<group>"; };
 		0F0E3FDA1A75EDA2008035D5 /* ImagePointAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ImagePointAnnotation.m; path = InstaFav/ImagePointAnnotation.m; sourceTree = "<group>"; };
+		0F0E3FDC1A75F619008035D5 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		0FC09BF01A71AAC50081C227 /* InstaFav.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = InstaFav.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0FC09BF41A71AAC50081C227 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0FC09BF51A71AAC50081C227 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		0FC09BF71A71AAC50081C227 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		0FC09BF81A71AAC50081C227 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		0FC09BFE1A71AAC50081C227 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		0FC09C001A71AAC50081C227 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		0FC09C031A71AAC50081C227 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		0FC09C091A71AAC50081C227 /* InstaFavTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = InstaFavTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0FC09C0E1A71AAC50081C227 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -213,7 +213,7 @@
 		0FC09C281A71C8350081C227 /* Other */ = {
 			isa = PBXGroup;
 			children = (
-				0FC09C001A71AAC50081C227 /* Images.xcassets */,
+				0F0E3FDC1A75F619008035D5 /* Images.xcassets */,
 				0FC09C021A71AAC50081C227 /* LaunchScreen.xib */,
 				0FC09BF31A71AAC50081C227 /* Supporting Files */,
 			);
@@ -309,9 +309,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0F0E3FDD1A75F619008035D5 /* Images.xcassets in Resources */,
 				0FC09BFF1A71AAC50081C227 /* Main.storyboard in Resources */,
 				0FC09C041A71AAC50081C227 /* LaunchScreen.xib in Resources */,
-				0FC09C011A71AAC50081C227 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

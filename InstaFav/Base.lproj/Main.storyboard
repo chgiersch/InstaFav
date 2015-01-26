@@ -90,7 +90,7 @@
             </objects>
             <point key="canvasLocation" x="1122" y="119"/>
         </scene>
-        <!--Map View Controller-->
+        <!--Map-->
         <scene sceneID="cAu-GB-nLO">
             <objects>
                 <viewController id="whf-mc-0lc" customClass="MapViewController" sceneMemberID="viewController">
@@ -117,7 +117,7 @@
                             <constraint firstItem="W2G-nQ-Lmz" firstAttribute="top" secondItem="NLO-4E-Rjz" secondAttribute="topMargin" id="iTJ-N1-ZtQ"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" selectedImage="trifoldMap_icon" systemItem="more" id="Q6u-fo-HjO"/>
+                    <tabBarItem key="tabBarItem" title="Map" image="trifoldMap_icon" id="Q6u-fo-HjO"/>
                     <connections>
                         <outlet property="mapView" destination="W2G-nQ-Lmz" id="GVG-Rv-GYC"/>
                     </connections>
@@ -251,7 +251,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="trifoldMap_icon" width="256" height="256"/>
+        <image name="trifoldMap_icon" width="29" height="30"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
