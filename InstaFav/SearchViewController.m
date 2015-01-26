@@ -56,9 +56,11 @@
     }
 }
 
-- (void)viewDidAppear:(BOOL)animated
+- (void)viewWillAppear:(BOOL)animated
 {
-    [super viewDidAppear:animated];
+    [super viewWillAppear:animated];
+    self.photoFavArray = [self.dataAccessor retrieveArrayFromFile];
+    [self comparePhotoArray:self.photosArray withFavArray:self.photoFavArray];
     [self.collectionView reloadData];
 }
 
@@ -67,13 +69,15 @@
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
 {
     NSString *searchTerm = searchBar.text;
-    NSCharacterSet *set = [NSCharacterSet whitespaceCharacterSet];
-    NSString *searchTermWithoutWhitespaces = [searchTerm stringByTrimmingCharactersInSet: set];
+    NSArray* words = [searchTerm componentsSeparatedByCharactersInSet :[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+    NSString* searchTermWithoutWhitespace = [words componentsJoinedByString:@""];
+
     //only do a search if searchTerm does not consist of only whitespace
-    if (searchTermWithoutWhitespaces != 0)
+    if (searchTermWithoutWhitespace != 0)
     {
         [self.spinner startAnimating];
-        [self.parser getImagesFromHashtagSearch:searchTermWithoutWhitespaces];
+        [self.parser getImagesFromHashtagSearch:searchTermWithoutWhitespace];
+        searchBar.text = searchTermWithoutWhitespace;
         [searchBar resignFirstResponder];
     }
 }
@@ -84,6 +88,7 @@
 {
     [self.spinner stopAnimating];
     self.photosArray = mutableArray;
+    [self comparePhotoArray:self.photosArray withFavArray:self.photoFavArray];
     [self.collectionView reloadData];
 }
 
@@ -111,8 +116,8 @@
     Photo *photo = [self.photosArray objectAtIndex:indexPath.row];
     //retrieves array from plish and adds/removes the photo depending on if it's favorited or not
     self.photoFavArray = [self addOrRemove:photo fromFavArray:[self.dataAccessor retrieveArrayFromFile]];
-    [self.dataAccessor saveArrayToFile:self.photoFavArray];
     [self.collectionView reloadData];
+    [self.dataAccessor saveArrayToFile:self.photoFavArray];
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
@@ -127,6 +132,9 @@
     }
 }
 
+
+//----------------------------------    Comparison Helper Methods   -----------------------------------
+#pragma mark - Comparison Helper Methods
 - (NSMutableArray *)addOrRemove: (Photo *)photo fromFavArray: (NSMutableArray *)array
 {
     //Goes through all photos in array and compares the Photo object's uniqueID
@@ -143,6 +151,24 @@
     photo.isFavorite = YES;
     [array addObject:photo];
     return array;
+}
+
+- (void)comparePhotoArray: (NSMutableArray *)photoArray withFavArray: (NSMutableArray *)favArray
+{
+    for (Photo *favPhoto in favArray)
+    {
+        for (Photo *photo in photoArray)
+        {
+            if ([favPhoto.uniqueID isEqualToString:photo.uniqueID])
+            {
+                photo.isFavorite = YES;
+            }
+            else
+            {
+                photo.isFavorite = NO;
+            }
+        }
+    }
 }
 
 @end

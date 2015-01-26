@@ -32,7 +32,6 @@
 #warning ****** should get some photos that have coordinate information to test this and decide the behavior for photos that don't have that information *****
 #warning ****** should also figure out what to do with photos that don't have coordinate information ******
             annotation.coordinate = photo.coordinate;
-#warning ****** figure out what we want to print in annotation title, if we even want one. ******
             annotation.title = photo.userName;
             [self.mapView addAnnotation:annotation];
         }

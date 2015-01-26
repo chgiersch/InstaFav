@@ -25,6 +25,7 @@
 		60ABD0931A74C7130048EA58 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 60ABD0921A74C7130048EA58 /* Social.framework */; };
 		60ABD0951A74CA420048EA58 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 60ABD0941A74CA420048EA58 /* MessageUI.framework */; };
 		60ABD0981A74D8E90048EA58 /* CustomCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 60ABD0971A74D8E90048EA58 /* CustomCollectionViewCell.m */; };
+		60ABD09B1A75BDF50048EA58 /* RemoveActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = 60ABD09A1A75BDF50048EA58 /* RemoveActivity.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -69,6 +70,8 @@
 		60ABD0941A74CA420048EA58 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		60ABD0961A74D8E90048EA58 /* CustomCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CustomCollectionViewCell.h; path = InstaFav/CustomCollectionViewCell.h; sourceTree = "<group>"; };
 		60ABD0971A74D8E90048EA58 /* CustomCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CustomCollectionViewCell.m; path = InstaFav/CustomCollectionViewCell.m; sourceTree = "<group>"; };
+		60ABD0991A75BDF50048EA58 /* RemoveActivity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RemoveActivity.h; path = InstaFav/RemoveActivity.h; sourceTree = "<group>"; };
+		60ABD09A1A75BDF50048EA58 /* RemoveActivity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RemoveActivity.m; path = InstaFav/RemoveActivity.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -171,6 +174,8 @@
 			children = (
 				6076D9EE1A71BDB5000574C4 /* JSONParser.h */,
 				6076D9EF1A71BDB5000574C4 /* JSONParser.m */,
+				60ABD0991A75BDF50048EA58 /* RemoveActivity.h */,
+				60ABD09A1A75BDF50048EA58 /* RemoveActivity.m */,
 				60ABD08A1A7480F70048EA58 /* Reachability.h */,
 				60ABD08B1A7480F70048EA58 /* Reachability.m */,
 				60ABD08F1A74AFD30048EA58 /* SavedDataAccessor.h */,
@@ -319,6 +324,7 @@
 				0FC09C1F1A71AF180081C227 /* SearchViewController.m in Sources */,
 				0FC09BF61A71AAC50081C227 /* main.m in Sources */,
 				60ABD08C1A7480F70048EA58 /* Reachability.m in Sources */,
+				60ABD09B1A75BDF50048EA58 /* RemoveActivity.m in Sources */,
 				60ABD0911A74AFD30048EA58 /* SavedDataAccessor.m in Sources */,
 				60ABD0981A74D8E90048EA58 /* CustomCollectionViewCell.m in Sources */,
 			);

@@ -15,8 +15,9 @@
 #import "Photo.h"
 #import "CustomCollectionViewCell.h"
 #import "SavedDataAccessor.h"
+#import "RemoveActivity.h"
 
-@interface FavoritesViewController () <UICollectionViewDataSource, UICollectionViewDelegate, MFMailComposeViewControllerDelegate>
+@interface FavoritesViewController () <UICollectionViewDataSource, UICollectionViewDelegate, MFMailComposeViewControllerDelegate, RemoveDelegate>
 
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 @property NSMutableArray *photoFavArray;
@@ -74,93 +75,110 @@
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
     Photo *photo = [self.photoFavArray objectAtIndex:indexPath.row];
-    //retrieves array from plish and adds/removes the photo depending on if it's favorited or not
-    self.photoFavArray = [self addOrRemove:photo fromFavArray:[self.dataAccessor retrieveArrayFromFile]];
-    [self.dataAccessor saveArrayToFile:self.photoFavArray];
-    [self.collectionView reloadData];
+
+    //Open action sheet for share/unfavorite options
+//    UIImage *imagetoshare = photo.image; //this is your image to share
+    NSArray *activityItems = @[photo.image, photo];
+    RemoveActivity *unfavoriteActivity = [RemoveActivity new];
+    unfavoriteActivity.delegate = self;
+    UIActivityViewController *activityVC = [[UIActivityViewController alloc] initWithActivityItems:activityItems applicationActivities:@[unfavoriteActivity]];
+    activityVC.excludedActivityTypes = @[UIActivityTypeAssignToContact, UIActivityTypePrint];
+    [self presentViewController:activityVC animated:TRUE completion:nil];
 }
 
-- (NSMutableArray *)addOrRemove: (Photo *)photo fromFavArray: (NSMutableArray *)array
+- (void)didPressRemoveButton:(NSArray *)activityItems
 {
-    //Goes through all photos in array and compares the Photo object's uniqueID
-    for (Photo *favedPhoto in array)
+    Photo *photo = [activityItems lastObject];
+    for (Photo *favPhoto in self.photoFavArray)
     {
-        //If photo has already been favorited
-        if ([favedPhoto.uniqueID isEqualToString: photo.uniqueID])
+        if ([favPhoto.uniqueID isEqualToString:photo.uniqueID])
         {
-            photo.isFavorite = NO;
-            [array removeObject:favedPhoto];
-            return array;
+            [self.photoFavArray removeObject:favPhoto];
+            [self.collectionView reloadData];
+            [self.dataAccessor saveArrayToFile:self.photoFavArray];
         }
     }
-    photo.isFavorite = YES;
-    [array addObject:photo];
-    return array;
 }
 
-#warning ****** Figure out when/where to put this method. Will the tweet button be on the customCollectionViewCell or the view controller? ******
-- (void)tweetFavImage: (Photo *)photo
-{
-    if ([SLComposeViewController isAvailableForServiceType:SLServiceTypeTwitter])
-    {
-        SLComposeViewController *tweetSheet = [SLComposeViewController composeViewControllerForServiceType:SLServiceTypeTwitter];
-        [tweetSheet setInitialText:@"Tweeting from InstaFav app! :)"];
-        [tweetSheet addImage:photo.image];
-        [self presentViewController:tweetSheet animated:YES completion:nil];
-    }
-    else
-    {
-        UIAlertView *alertView = [[UIAlertView alloc]
-                                  initWithTitle:@"Sorry"
-                                  message:@"You can't send a tweet right now, make sure your device has an internet connection and you have at least one Twitter account setup"
-                                  delegate:self
-                                  cancelButtonTitle:@"OK"
-                                  otherButtonTitles:nil];
-        [alertView show];
-    }
-}
+//- (NSMutableArray *)addOrRemove: (Photo *)photo fromFavArray: (NSMutableArray *)array
+//{
+//    //Goes through all photos in array and compares the Photo object's uniqueID
+//    for (Photo *favedPhoto in array)
+//    {
+//        //If photo has already been favorited
+//        if ([favedPhoto.uniqueID isEqualToString: photo.uniqueID])
+//        {
+//            //Open action sheet for share/unfavorite options
+//        }
+//    }
+//    photo.isFavorite = YES;
+//    [array addObject:photo];
+//    return array;
+//}
 
-#warning ****** Figure out when/where to put this method. Will the e-mail button be on the customCollectionViewCell or the view controller? ******
-- (void)emailFavImage: (Photo *)photo
-{
-    if ([MFMailComposeViewController canSendMail])
-    {
-        MFMailComposeViewController *mail = [[MFMailComposeViewController alloc] init];
-        mail.mailComposeDelegate = self;
-        [mail setSubject:@"InstaFav"];
-        [mail setMessageBody:@"Look at this picture I InstaFaved!" isHTML:NO];
-        [mail setToRecipients:@[@"testingEmail@example.com"]];
-        NSData *myData = UIImagePNGRepresentation(photo.image);
-        [mail addAttachmentData:myData mimeType:@"image/png" fileName:@"InstaFavImage"];
-        [self presentViewController:mail animated:YES completion:NULL];
-    }
-    else
-    {
-        NSLog(@"This device cannot send email");
-    }
-}
+//#warning ****** Figure out when/where to put this method. Will the tweet button be on the customCollectionViewCell or the view controller? ******
+//- (void)tweetFavImage: (Photo *)photo
+//{
+//    if ([SLComposeViewController isAvailableForServiceType:SLServiceTypeTwitter])
+//    {
+//        SLComposeViewController *tweetSheet = [SLComposeViewController composeViewControllerForServiceType:SLServiceTypeTwitter];
+//        [tweetSheet setInitialText:@"Tweeting from InstaFav app! :)"];
+//        [tweetSheet addImage:photo.image];
+//        [self presentViewController:tweetSheet animated:YES completion:nil];
+//    }
+//    else
+//    {
+//        UIAlertView *alertView = [[UIAlertView alloc]
+//                                  initWithTitle:@"Sorry"
+//                                  message:@"You can't send a tweet right now, make sure your device has an internet connection and you have at least one Twitter account setup"
+//                                  delegate:self
+//                                  cancelButtonTitle:@"OK"
+//                                  otherButtonTitles:nil];
+//        [alertView show];
+//    }
+//}
 
-- (void)mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error
-{
-    switch (result) {
-        case MFMailComposeResultSent:
-            NSLog(@"You sent the email.");
-            break;
-        case MFMailComposeResultSaved:
-            NSLog(@"You saved a draft of this email");
-            break;
-        case MFMailComposeResultCancelled:
-            NSLog(@"You cancelled sending this email.");
-            break;
-        case MFMailComposeResultFailed:
-            NSLog(@"Mail failed:  An error occurred when trying to compose this email");
-            break;
-        default:
-            NSLog(@"An error occurred when trying to compose this email");
-            break;
-    }
-
-    [self dismissViewControllerAnimated:YES completion:NULL];
-}
+//#warning ****** Figure out when/where to put this method. Will the e-mail button be on the customCollectionViewCell or the view controller? ******
+//- (void)emailFavImage: (Photo *)photo
+//{
+//    if ([MFMailComposeViewController canSendMail])
+//    {
+//        MFMailComposeViewController *mail = [[MFMailComposeViewController alloc] init];
+//        mail.mailComposeDelegate = self;
+//        [mail setSubject:@"InstaFav"];
+//        [mail setMessageBody:@"Look at this picture I InstaFaved!" isHTML:NO];
+//        [mail setToRecipients:@[@"testingEmail@example.com"]];
+//        NSData *myData = UIImagePNGRepresentation(photo.image);
+//        [mail addAttachmentData:myData mimeType:@"image/png" fileName:@"InstaFavImage"];
+//        [self presentViewController:mail animated:YES completion:NULL];
+//    }
+//    else
+//    {
+//        NSLog(@"This device cannot send email");
+//    }
+//}
+//
+//- (void)mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error
+//{
+//    switch (result) {
+//        case MFMailComposeResultSent:
+//            NSLog(@"You sent the email.");
+//            break;
+//        case MFMailComposeResultSaved:
+//            NSLog(@"You saved a draft of this email");
+//            break;
+//        case MFMailComposeResultCancelled:
+//            NSLog(@"You cancelled sending this email.");
+//            break;
+//        case MFMailComposeResultFailed:
+//            NSLog(@"Mail failed:  An error occurred when trying to compose this email");
+//            break;
+//        default:
+//            NSLog(@"An error occurred when trying to compose this email");
+//            break;
+//    }
+//
+//    [self dismissViewControllerAnimated:YES completion:NULL];
+//}
 
 @end
