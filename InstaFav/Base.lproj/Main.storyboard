@@ -139,7 +139,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="cb5-iC-RYh">
-                                <rect key="frame" x="0.0" y="20" width="320" height="44"/>
+                                <rect key="frame" x="0.0" y="20" width="179" height="44"/>
                                 <textInputTraits key="textInputTraits"/>
                                 <connections>
                                     <outlet property="delegate" destination="bqw-gi-Lcc" id="RdD-6b-vVq"/>
@@ -203,16 +203,32 @@
                                     <constraint firstAttribute="width" constant="37" id="gfO-Zs-emE"/>
                                 </constraints>
                             </activityIndicatorView>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="8R8-X2-46r">
+                                <rect key="frame" x="189" y="28" width="120" height="29"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="120" id="QQy-vF-P5I"/>
+                                    <constraint firstAttribute="height" constant="28" id="ZCH-Xs-lbj"/>
+                                </constraints>
+                                <segments>
+                                    <segment title="Tag"/>
+                                    <segment title="User"/>
+                                </segments>
+                                <connections>
+                                    <action selector="onSegmentSwitch:" destination="bqw-gi-Lcc" eventType="valueChanged" id="KKe-YY-gNo"/>
+                                </connections>
+                            </segmentedControl>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="cb5-iC-RYh" firstAttribute="leading" secondItem="8dT-Wg-cF5" secondAttribute="leading" id="8XA-gd-vcS"/>
                             <constraint firstItem="lZB-nh-pu3" firstAttribute="top" secondItem="cb5-iC-RYh" secondAttribute="bottom" id="9JU-Ww-Alf"/>
                             <constraint firstItem="gwA-bE-LzN" firstAttribute="top" secondItem="lZB-nh-pu3" secondAttribute="bottom" id="CVo-wf-3Aj"/>
+                            <constraint firstItem="8R8-X2-46r" firstAttribute="top" secondItem="kGz-IB-a1o" secondAttribute="bottom" constant="8" id="Fo3-jl-zev"/>
                             <constraint firstItem="cb5-iC-RYh" firstAttribute="top" secondItem="8dT-Wg-cF5" secondAttribute="top" constant="20" id="XNk-Vw-GlV"/>
                             <constraint firstAttribute="centerY" secondItem="amw-ii-keZ" secondAttribute="centerY" id="Xhf-fV-K27"/>
                             <constraint firstAttribute="centerX" secondItem="amw-ii-keZ" secondAttribute="centerX" id="ZFK-jd-CHN"/>
-                            <constraint firstAttribute="trailing" secondItem="cb5-iC-RYh" secondAttribute="trailing" id="clY-dh-zmF"/>
+                            <constraint firstAttribute="trailing" secondItem="cb5-iC-RYh" secondAttribute="trailing" constant="141" id="clY-dh-zmF"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="8R8-X2-46r" secondAttribute="trailing" constant="-5" id="gnx-6L-B7f"/>
                             <constraint firstAttribute="trailingMargin" secondItem="lZB-nh-pu3" secondAttribute="trailing" constant="-16" id="hx5-NQ-iq3"/>
                             <constraint firstItem="lZB-nh-pu3" firstAttribute="leading" secondItem="8dT-Wg-cF5" secondAttribute="leadingMargin" constant="-16" id="xwT-aY-li8"/>
                         </constraints>
@@ -222,6 +238,7 @@
                     <connections>
                         <outlet property="collectionView" destination="lZB-nh-pu3" id="F6m-Z9-uEu"/>
                         <outlet property="searchBar" destination="cb5-iC-RYh" id="ph3-ZV-fgr"/>
+                        <outlet property="segmentedControl" destination="8R8-X2-46r" id="b7o-xA-2nu"/>
                         <outlet property="spinner" destination="amw-ii-keZ" id="RTd-zF-Hiy"/>
                     </connections>
                 </viewController>

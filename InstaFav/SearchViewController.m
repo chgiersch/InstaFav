@@ -16,11 +16,12 @@
 @interface SearchViewController () <UICollectionViewDataSource, UICollectionViewDelegate, ParserDelegate, UISearchBarDelegate>
 
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
-@property NSMutableArray *photosArray;
-@property NSMutableArray *photoFavArray;
 @property (strong, nonatomic) IBOutlet UIActivityIndicatorView *spinner;
 @property (strong, nonatomic) IBOutlet UISearchBar *searchBar;
+@property (weak, nonatomic) IBOutlet UISegmentedControl *segmentedControl;
 
+@property NSMutableArray *photosArray;
+@property NSMutableArray *photoFavArray;
 @property NSString *hashtag;
 @property JSONParser *parser;
 @property Reachability *internetConnectionReach;
@@ -39,8 +40,9 @@
     self.photoFavArray = [self.dataAccessor retrieveArrayFromFile];
     self.parser = [JSONParser new];
 
-    //Default search is "cats". ^_^
+    //Default search is by hashtag:"cats". ^_^
     self.hashtag = @"cats";
+    self.searchBar.text = self.hashtag;
     self.parser.delegate = self;
     self.internetConnectionReach = [Reachability reachabilityForInternetConnection];
     if ([self.internetConnectionReach isReachable])
@@ -76,11 +78,26 @@
     if (searchTermWithoutWhitespace != 0)
     {
         [self.spinner startAnimating];
-        [self.parser getImagesFromHashtagSearch:searchTermWithoutWhitespace];
+        if (self.segmentedControl.selectedSegmentIndex == 0)
+        {
+            [self.parser getImagesFromHashtagSearch:searchTermWithoutWhitespace];
+
+        }
+        else
+        {
+            [self.parser getImagesFromUserNameSearch:searchTermWithoutWhitespace];
+        }
         searchBar.text = searchTermWithoutWhitespace;
         [searchBar resignFirstResponder];
     }
 }
+
+- (IBAction)onSegmentSwitch:(id)sender
+{
+    self.searchBar.text = @"";
+}
+
+
 
 //-------------------------------    JSON Parser Delegate Methods    -----------------------------------
 #pragma mark - JSON Parser

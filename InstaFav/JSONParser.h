@@ -21,6 +21,7 @@
 @property (nonatomic, weak) id<ParserDelegate> delegate;
 
 - (void)getImagesFromHashtagSearch:(NSString *)hashtag;
+- (void)getImagesFromUserNameSearch:(NSString *)userName;
 
 
 @end
