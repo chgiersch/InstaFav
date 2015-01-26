@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0F0E3FDB1A75EDA2008035D5 /* ImagePointAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F0E3FDA1A75EDA2008035D5 /* ImagePointAnnotation.m */; };
 		0FC09BF61A71AAC50081C227 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FC09BF51A71AAC50081C227 /* main.m */; };
 		0FC09BF91A71AAC50081C227 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FC09BF81A71AAC50081C227 /* AppDelegate.m */; };
 		0FC09BFF1A71AAC50081C227 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0FC09BFD1A71AAC50081C227 /* Main.storyboard */; };
@@ -39,6 +40,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0F0E3FD91A75EDA2008035D5 /* ImagePointAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ImagePointAnnotation.h; path = InstaFav/ImagePointAnnotation.h; sourceTree = "<group>"; };
+		0F0E3FDA1A75EDA2008035D5 /* ImagePointAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ImagePointAnnotation.m; path = InstaFav/ImagePointAnnotation.m; sourceTree = "<group>"; };
 		0FC09BF01A71AAC50081C227 /* InstaFav.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = InstaFav.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0FC09BF41A71AAC50081C227 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0FC09BF51A71AAC50081C227 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -96,13 +99,21 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		0FC09BE71A71AAC50081C227 = {
+		0F0E3FD81A75C7AE008035D5 /* Framworks */ = {
 			isa = PBXGroup;
 			children = (
 				60ABD0941A74CA420048EA58 /* MessageUI.framework */,
 				60ABD0921A74C7130048EA58 /* Social.framework */,
 				60ABD08D1A7481E20048EA58 /* SystemConfiguration.framework */,
 				6076D9F41A71C22D000574C4 /* MapKit.framework */,
+			);
+			name = Framworks;
+			sourceTree = "<group>";
+		};
+		0FC09BE71A71AAC50081C227 = {
+			isa = PBXGroup;
+			children = (
+				0F0E3FD81A75C7AE008035D5 /* Framworks */,
 				0FC09BF21A71AAC50081C227 /* InstaFav */,
 				0FC09C0C1A71AAC50081C227 /* InstaFavTests */,
 				0FC09BF11A71AAC50081C227 /* Products */,
@@ -182,6 +193,8 @@
 				60ABD0901A74AFD30048EA58 /* SavedDataAccessor.m */,
 				6076D9F01A71BDB5000574C4 /* Photo.h */,
 				6076D9F11A71BDB5000574C4 /* Photo.m */,
+				0F0E3FD91A75EDA2008035D5 /* ImagePointAnnotation.h */,
+				0F0E3FDA1A75EDA2008035D5 /* ImagePointAnnotation.m */,
 				60ABD0961A74D8E90048EA58 /* CustomCollectionViewCell.h */,
 				60ABD0971A74D8E90048EA58 /* CustomCollectionViewCell.m */,
 			);
@@ -321,6 +334,7 @@
 				0FC09C1B1A71ABD80081C227 /* FavoritesViewController.m in Sources */,
 				6076D9F21A71BDB5000574C4 /* JSONParser.m in Sources */,
 				0FC09C221A71AF8B0081C227 /* MapViewController.m in Sources */,
+				0F0E3FDB1A75EDA2008035D5 /* ImagePointAnnotation.m in Sources */,
 				0FC09C1F1A71AF180081C227 /* SearchViewController.m in Sources */,
 				0FC09BF61A71AAC50081C227 /* main.m in Sources */,
 				60ABD08C1A7480F70048EA58 /* Reachability.m in Sources */,

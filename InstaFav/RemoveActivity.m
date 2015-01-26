@@ -7,6 +7,7 @@
 //
 
 #import "RemoveActivity.h"
+#import <UIKit/UIKit.h>
 
 @implementation RemoveActivity
 
@@ -17,7 +18,7 @@
 
 - (NSString *)activityTitle
 {
-    return @"RemoveActivity";
+    return @"Remove from Favorites";
 }
 
 - (UIImage *)activityImage
@@ -28,12 +29,21 @@
 
     if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
     {
-        return [UIImage imageNamed:@"iPadShare.png"];
+        return [self scale:[UIImage imageNamed:@"unfav"] toSize:CGSizeMake(76, 76)];
     }
     else
     {
-        return [UIImage imageNamed:@"iPhoneShare.png"];
+        return [self scale:[UIImage imageNamed:@"unfav"] toSize:CGSizeMake(65, 65)];
     }
+}
+
+- (UIImage *)scale:(UIImage *)image toSize:(CGSize)size
+{
+    UIGraphicsBeginImageContext(size);
+    [image drawInRect:CGRectMake(0, 0, size.width, size.height)];
+    UIImage *scaledImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return scaledImage;
 }
 
 - (BOOL)canPerformWithActivityItems:(NSArray *)activityItems

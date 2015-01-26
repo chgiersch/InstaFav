@@ -96,6 +96,7 @@
             [self.photoFavArray removeObject:favPhoto];
             [self.collectionView reloadData];
             [self.dataAccessor saveArrayToFile:self.photoFavArray];
+            break;
         }
     }
 }

@@ -155,17 +155,15 @@
 
 - (void)comparePhotoArray: (NSMutableArray *)photoArray withFavArray: (NSMutableArray *)favArray
 {
-    for (Photo *favPhoto in favArray)
+    for (Photo *photo in photoArray)
     {
-        for (Photo *photo in photoArray)
+        photo.isFavorite = NO;
+        for (Photo *favPhoto in favArray)
         {
             if ([favPhoto.uniqueID isEqualToString:photo.uniqueID])
             {
                 photo.isFavorite = YES;
-            }
-            else
-            {
-                photo.isFavorite = NO;
+                break;
             }
         }
     }

@@ -28,7 +28,9 @@
         {
             double latitude = [location[@"latitude"] doubleValue];
             double longitude = [location[@"longitude" ] doubleValue];
+            //Only initialize coordinate if it exists.
             self.coordinate = CLLocationCoordinate2DMake(latitude,longitude);
+
         }
         self.hashtags = dictionary[@"tags"];
         self.userName = dictionary[@"user"][@"username"];
@@ -42,7 +44,7 @@
     [encoder encodeBool:self.isFavorite forKey:@"isFavorite"];
     [encoder encodeObject:self.image forKey:@"image"];
     [encoder encodeDouble:self.coordinate.latitude forKey:@"latitude"];
-    [encoder encodeDouble:self.coordinate.longitude forKey:@"longitide"];
+    [encoder encodeDouble:self.coordinate.longitude forKey:@"longitude"];
     [encoder encodeObject:self.hashtags forKey:@"hashtags"];
     [encoder encodeObject:self.userName forKey:@"userName"];
 
